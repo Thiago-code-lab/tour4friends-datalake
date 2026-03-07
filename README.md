@@ -42,15 +42,10 @@
       </td>
       <td align="center">
         <a href="#">
-          <img src="https://media.licdn.com/dms/image/v2/C4D03AQFgxzNm-DDZUg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1619123196498?e=1772668800&v=beta&t=A-ltN3z0UYXvaEcXxOLr3oPq8UNSLxIm5VhRdoVtqsQ" width="100px;" alt="Membro 4"/><br/>
+          <img src="https://media.licdn.com/dms/image/v2/C4D03AQFgxzNm-DDZUg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1619123196498?e=1774483200&v=beta&t=2e1mPIFrfhDSjsOC8In234xJ_rkyJ5cRLbjxfDiZhUo" width="100px;" alt="Membro 4"/><br/>
           <sub><b>William Nunes</b></sub>
         </a>
-      </td>
-      <td align="center">
-        <a href="#">
-          <img src="https://github.com/user-attachments/assets/236f15c6-4d49-42b4-881e-5ef0b3703300" width="100px;" alt="Membro 4"/><br/>
-          <sub><b>Murilo Santos</b></sub>
-        </a>
+      </td>>
       </td>
       <td align="center">
         <a href="#">
