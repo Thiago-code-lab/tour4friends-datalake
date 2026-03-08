@@ -62,29 +62,53 @@
 ---
 
 ## 🔄 Arquitetura do Fluxo de Dados
+---
+
+## 🔄 Arquitetura do Fluxo de Dados
+Aqui está o conteúdo completo formatado em Markdown para você copiar e colar diretamente no seu arquivo README.md do GitHub.
+
+Esta documentação foi estruturada para atender a todos os requisitos do seu projeto Tour4Friends na FATEC Ipiranga, focando na análise de comportamento de compra.
+
+✈️ Tour4Friends: Arquitetura de Data Lake e Pipeline de ELT (MVP)
+Este repositório documenta a construção da arquitetura de dados voltada para a análise estratégica de comportamento de compra e reservas da agência de viagens Tour4Friends.
+
+🏗️ Diagrama de Arquitetura em Nuvem
+A arquitetura segue o modelo ELT (Extract, Load, Transform), utilizando um barramento de streaming para garantir a agilidade no processamento dos dados operacionais.
+
 ```mermaid
-%%{init: {'theme':'neutral', 'themeVariables': { 'primaryColor':'#6366f1','primaryTextColor':'#ffffff','primaryBorderColor':'#4f46e5','lineColor':'#9ca3af','fontSize':'15px'}}}%%
 graph LR
-    A[Simulator] -->|stream| B((Kafka))
-    B -->|batch| C[(S3)]
-    C -.->|schedule| D{Airflow}
-    D --> E[Pandas]
-    E -->|refined| F[(MongoDB)]
-    F -->|query| G[BI Tools]
+    A[(MongoDB Operational)] -- "Change Streams (CDC)" --> B[Apache Kafka]
+    B -- "Kafka Connect (S3 Sink)" --> C{{S3: Raw Zone}}
+    C -- "AWS Glue (Spark Transformation)" --> D{{S3: Processed Zone}}
+    D -- "AWS Glue (Spark Aggregation)" --> E{{S3: Curated Zone}}
+    E --- F[AWS Glue Data Catalog]
+    F --- G[Amazon Athena]
+    G --- H[Power BI]
     
-    classDef source fill:#6366f1,stroke:#4f46e5,stroke-width:2px,color:#fff
-    classDef stream fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
-    classDef storage fill:#0ea5e9,stroke:#0284c7,stroke-width:2px,color:#fff
-    classDef process fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
-    classDef db fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
-    classDef viz fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#fff
+    subgraph "Data Lake (Amazon S3)"
+        C
+        D
+        E
+    end
     
-    class A source
-    class B stream
-    class C,F storage
-    class D,E process
-    class G viz
+    style C fill:#f9f,stroke:#333
+    style D fill:#bbf,stroke:#333
+    style E fill:#bfb,stroke:#333
 ```
+📋 Descrição do Pipeline
+Para garantir a entrega de um MVP funcional e focado, o pipeline foi desenhado para processar especificamente os dados de interação e reservas dos usuários:
+
+Ingestão (Extract & Load): Os dados são extraídos do MongoDB em tempo real via Change Data Capture (CDC) e enviados ao Apache Kafka. O Kafka Connect realiza a carga direta (Load) dos dados brutos no Amazon S3.
+
+Camadas do Data Lake (Medallion Architecture):
+
+Raw Zone (Bronze): Armazena os eventos originais em formato JSON.
+
+Processed Zone (Silver): Dados limpos, tipados e convertidos para formato colunar (Parquet) via AWS Glue.
+
+Curated Zone (Gold): Tabelas agregadas com regras de negócio prontas para análise.
+
+Catálogo e Analytics (Transform & Consumption): O Glue Data Catalog gerencia os metadados, permitindo que o Amazon Athena execute consultas SQL diretamente no S3 para alimentar os dashboards no Power BI.
 
 
 
