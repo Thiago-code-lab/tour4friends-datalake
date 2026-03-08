@@ -61,11 +61,9 @@
 
 ---
 
-## 🔄 Arquitetura do Fluxo de Dados
----
+🔄 Arquitetura do Fluxo de Dados
 
-## 🔄 Arquitetura do Fluxo de Dados
-Aqui está o conteúdo completo formatado em Markdown para você copiar e colar diretamente no seu arquivo README.md do GitHub.
+---
 
 Esta documentação foi estruturada para atender a todos os requisitos do seu projeto Tour4Friends na FATEC Ipiranga, focando na análise de comportamento de compra.
 
@@ -75,7 +73,8 @@ Este repositório documenta a construção da arquitetura de dados voltada para 
 🏗️ Diagrama de Arquitetura em Nuvem
 A arquitetura segue o modelo ELT (Extract, Load, Transform), utilizando um barramento de streaming para garantir a agilidade no processamento dos dados operacionais.
 
-```mermaid
+Snippet de código
+
 graph LR
     A[(MongoDB Operational)] -- "Change Streams (CDC)" --> B[Apache Kafka]
     B -- "Kafka Connect (S3 Sink)" --> C{{S3: Raw Zone}}
@@ -94,7 +93,6 @@ graph LR
     style C fill:#f9f,stroke:#333
     style D fill:#bbf,stroke:#333
     style E fill:#bfb,stroke:#333
-```
 📋 Descrição do Pipeline
 Para garantir a entrega de um MVP funcional e focado, o pipeline foi desenhado para processar especificamente os dados de interação e reservas dos usuários:
 
