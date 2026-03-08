@@ -64,18 +64,17 @@
 
 ---
 
-```markdown
 # 🔄 Arquitetura do Fluxo de Dados
 
-Esta documentação foi estruturada para atender a todos os requisitos do projeto **Tour4Friends** na **FATEC Ipiranga**, focando na análise de comportamento de compra.
+Esta documentação detalha a infraestrutura de dados para o projeto **Tour4Friends**. O foco principal é a análise estratégica do comportamento de compra e reservas, utilizando tecnologias de ponta em **Big Data**.
 
 ## ✈️ Tour4Friends: Arquitetura de Data Lake e Pipeline de ELT (MVP)
 
-Este repositório documenta a construção da arquitetura de dados voltada para a análise estratégica de comportamento de compra e reservas da agência de viagens **Tour4Friends**.
+Este repositório documenta a construção de um pipeline escalável para a agência de viagens **Tour4Friends**. A solução visa transformar dados operacionais em insights de negócio de forma ágil.
 
 ## 🏗️ Diagrama de Arquitetura em Nuvem
 
-A arquitetura segue o modelo **ELT (Extract, Load, Transform)**, utilizando um barramento de streaming para garantir a agilidade no processamento dos dados operacionais.
+A arquitetura segue o modelo **ELT (Extract, Load, Transform)**, utilizando um barramento de streaming para garantir a agilidade no processamento dos dados.
 
 ```mermaid
 graph LR
@@ -112,7 +111,7 @@ Para garantir a entrega de um MVP funcional e focado, o pipeline foi desenhado p
 * **Ingestão (Extract & Load):** Os dados são extraídos do **MongoDB** em tempo real via **Change Data Capture (CDC)** e enviados ao **Apache Kafka**. O **Kafka Connect** realiza a carga direta (**Load**) dos dados brutos no **Amazon S3**.
 * **Camadas do Data Lake (Medallion Architecture):**
 * **Raw Zone (Bronze):** Armazena os eventos originais em formato **JSON**.
-* **Processed Zone (Silver):** Dados limpos, tipados e convertidos para formato colunar (**Parquet**) via **AWS Glue**.
+* **Processed Zone (Silver):** Dados limpos, tipados e convertidos para formato colunar (**Parquet**) via **AWS Glue (Spark)**.
 * **Curated Zone (Gold):** Tabelas agregadas com regras de negócio prontas para análise estratégica.
 
 
@@ -122,11 +121,14 @@ Para garantir a entrega de um MVP funcional e focado, o pipeline foi desenhado p
 
 | Camada | Tecnologia | Função na Estrutura |
 | --- | --- | --- |
-| **Armazenamento** | Amazon S3 | Data Lake escalável organizado em camadas Medallion. |
+| **Fonte** | MongoDB | Banco de dados NoSQL operacional para registros de viagens. |
 | **Ingestão** | Apache Kafka | Barramento de streaming para processamento de eventos em tempo real. |
-| **Processamento** | AWS Glue (Spark) | Engine para transformação de dados e conversão de formatos. |
+| **Processamento** | AWS Glue (Spark) | Engine para transformação de dados e conversão de formatos (JSON para Parquet). |
+| **Armazenamento** | Amazon S3 | Data Lake escalável organizado em camadas Medallion. |
 | **Catálogo** | Glue Data Catalog | Repositório central de metadados para governança e descoberta. |
+| **Analytics** | Amazon Athena | Motor de consultas SQL serverless para análise de dados no S3. |
 
+---
 
 
 
