@@ -66,6 +66,7 @@
 
 # 🔄 Arquitetura do Fluxo de Dados
 
+
 Esta documentação detalha a infraestrutura de dados para o projeto **Tour4Friends**. O foco principal é a análise estratégica do comportamento de compra e reservas, utilizando tecnologias de ponta em **Big Data**.
 
 ## ✈️ Tour4Friends: Arquitetura de Data Lake e Pipeline de ELT (MVP)
@@ -76,33 +77,8 @@ Este repositório documenta a construção de um pipeline escalável para a agê
 
 A arquitetura segue o modelo **ELT (Extract, Load, Transform)**, utilizando um barramento de streaming para garantir a agilidade no processamento dos dados.
 
-```mermaid
-graph LR
-    A[(MongoDB Operational)] -- "Change Streams (CDC)" --> B[Apache Kafka]
-    B -- "Kafka Connect (S3 Sink)" --> C{{S3: Raw Zone}}
-    C -- "AWS Glue (Spark Transformation)" --> D{{S3: Processed Zone}}
-    D -- "AWS Glue (Spark Aggregation)" --> E{{S3: Curated Zone}}
-    E --- F[AWS Glue Data Catalog]
-    F --- G[Amazon Athena]
-    G --- H[Power BI]
-    
-    subgraph "Data Lake (Amazon S3) - Medallion Architecture"
-        C
-        D
-        E
-    end
-    
-    %% Definição de Estilos de Cores Coerentes
-    style A fill:#f5f5f5,stroke:#333,stroke-width:1px
-    style B fill:#f5f5f5,stroke:#333,stroke-width:1px
-    style C fill:#add8e6,stroke:#333,stroke-width:2px %% Azul Claro (Bronze/Raw)
-    style D fill:#87ceeb,stroke:#333,stroke-width:2px %% Azul Médio (Silver/Processed)
-    style E fill:#ffd700,stroke:#333,stroke-width:2px %% Ouro (Gold/Curated)
-    style F fill:#e0e0e0,stroke:#333,stroke-width:1px %% Cinza (Glue Catalog)
-    style G fill:#d4edda,stroke:#333,stroke-width:2px %% Verde (Athena/Analytics)
-    style H fill:#d4edda,stroke:#333,stroke-width:2px %% Verde (Power BI/Viz)
+<img width="2816" height="1536" alt="Arquitetura de software" src="https://github.com/user-attachments/assets/fad4f7f8-db08-4c82-915d-fe46e51db278" />
 
-```
 
 ## 📋 Descrição do Pipeline
 
