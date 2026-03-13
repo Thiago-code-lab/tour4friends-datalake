@@ -5,25 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tour4Friends Analytics · Data Lake</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg:      #05080f;
-      --bg2:     #090d18;
-      --bg3:     #0d1120;
-      --bg4:     #111827;
-      --line:    rgba(255,255,255,0.06);
-      --line2:   rgba(255,255,255,0.12);
-      --aws:     #FF9900;
-      --blue:    #3b82f6;
-      --teal:    #14b8a6;
-      --green:   #22c55e;
-      --purple:  #8b5cf6;
-      --text:    #f0f4ff;
-      --text2:   #6b7a99;
-      --text3:   #2d3650;
-      --mono:    'IBM Plex Mono', monospace;
-      --sans:    'Space Grotesk', sans-serif;
+      --bg:    #141922;
+      --bg2:   #1b2230;
+      --bg3:   #232c3d;
+      --line:  rgba(255,255,255,0.12);
+      --line2: rgba(255,255,255,0.2);
+      --text:  #f4f7ff;
+      --text2: #c3cbe0;
+      --text3: #9aa6c4;
+      --aws:   #FF9900;
+      --mono:  'IBM Plex Mono', monospace;
+      --sans:  'Inter', sans-serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,729 +28,432 @@
       font-family: var(--sans);
       background: var(--bg);
       color: var(--text);
-      overflow-x: hidden;
+      font-size: 14px;
+      line-height: 1.6;
     }
 
-    body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 0;
-      background-image:
-        linear-gradient(var(--line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--line) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
-    }
-
-    .glow-top {
-      position: fixed; top: -200px; left: 50%;
-      transform: translateX(-50%);
-      width: 900px; height: 500px;
-      background: radial-gradient(ellipse, rgba(59,130,246,0.07) 0%, transparent 70%);
-      pointer-events: none; z-index: 0;
-    }
-    .glow-right {
-      position: fixed; top: 40%; right: -200px;
-      width: 600px; height: 600px;
-      background: radial-gradient(ellipse, rgba(255,153,0,0.05) 0%, transparent 60%);
-      pointer-events: none; z-index: 0;
-    }
-
-    * { position: relative; z-index: 1; }
-    body::before, .glow-top, .glow-right { z-index: 0; }
-
-    .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
     a { color: inherit; text-decoration: none; }
+    .shell { width: min(1080px, calc(100% - 48px)); margin: 0 auto; }
 
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(5,8,15,0.85);
-      backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--line);
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(16px);
     }
     .nav-inner {
       display: flex; align-items: center;
       justify-content: space-between;
-      gap: 16px; padding: 16px 0;
+      padding: 18px 0;
     }
-    .logo {
-      display: flex; align-items: center; gap: 12px;
-    }
-    .logo-mark {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
-      display: grid; place-items: center;
-      box-shadow: 0 0 24px rgba(59,130,246,0.3);
-      flex-shrink: 0;
-    }
-    .logo-mark svg { width: 20px; height: 20px; }
-    .logo-name {
-      font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em;
-    }
-    .logo-tag {
-      font-family: var(--mono); font-size: 0.65rem;
-      color: var(--text2); letter-spacing: 0.05em;
-    }
-    .nav-links { display: flex; gap: 6px; }
+    .logo-text { font-size: 13px; font-weight: 500; letter-spacing: -0.01em; }
+    .logo-sub { font-family: var(--mono); font-size: 10px; color: var(--text2); margin-top: 1px; letter-spacing: 0.06em; }
+    .nav-links { display: flex; gap: 4px; align-items: center; }
     .nav-btn {
-      font-family: var(--sans); font-size: 0.75rem; font-weight: 500;
-      padding: 7px 14px; border-radius: 6px;
-      border: 1px solid var(--line2); background: transparent;
-      color: var(--text2); cursor: pointer; transition: all 0.18s;
+      font-family: var(--sans); font-size: 12px;
+      padding: 6px 12px; border-radius: 5px;
+      border: 1px solid transparent; background: transparent;
+      color: var(--text2); cursor: pointer; transition: all 0.15s;
+      transform: translateY(0);
     }
-    .nav-btn:hover { border-color: var(--blue); color: var(--text); }
-    .nav-btn.primary {
-      background: linear-gradient(135deg, #1d4ed8, #2563eb);
-      border-color: transparent; color: #fff;
-      box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    .nav-btn:hover {
+      color: var(--text);
+      border-color: var(--line2);
+      background: rgba(255,255,255,0.04);
+      transform: translateY(-1px);
     }
-    .nav-btn.primary:hover { box-shadow: 0 0 30px rgba(37,99,235,0.5); }
+    .nav-btn.primary { border-color: var(--line2); color: var(--text); }
+    .nav-btn.primary:hover { border-color: rgba(255,255,255,0.3); }
 
-    .hero {
-      padding: 80px 0 56px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
-      align-items: center;
-    }
+    .hero { padding: 80px 0 64px; border-bottom: 1px solid var(--line); }
     .hero-eyebrow {
-      font-family: var(--mono); font-size: 0.7rem; font-weight: 500;
-      color: var(--aws); letter-spacing: 0.12em; text-transform: uppercase;
-      margin-bottom: 16px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .hero-eyebrow::before {
-      content: ''; display: block;
-      width: 24px; height: 1px; background: var(--aws);
-    }
-    .hero h1 {
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 700; letter-spacing: -0.04em; line-height: 1.1;
+      font-family: var(--mono); font-size: 10px;
+      color: var(--text2); letter-spacing: 0.12em; text-transform: uppercase;
       margin-bottom: 20px;
     }
-    .hero h1 em {
-      font-style: normal;
-      background: linear-gradient(135deg, #60a5fa, #38bdf8, #14b8a6);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 300; letter-spacing: -0.04em; line-height: 1.1;
+      margin-bottom: 20px; max-width: 640px;
     }
+    .hero h1 strong { font-weight: 600; }
     .hero-desc {
-      font-size: 0.95rem; color: var(--text2); line-height: 1.8;
-      margin-bottom: 28px; max-width: 480px;
+      font-size: 14px; color: var(--text2); line-height: 1.8;
+      max-width: 520px; margin-bottom: 32px; font-weight: 300;
     }
-    .hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; }
-    .cta-primary {
-      font-family: var(--sans); font-size: 0.85rem; font-weight: 600;
-      padding: 11px 22px; border-radius: 7px;
-      background: linear-gradient(135deg, #1d4ed8, #2563eb);
-      border: 1px solid rgba(59,130,246,0.4); color: #fff;
-      cursor: pointer; transition: all 0.2s;
-      box-shadow: 0 0 24px rgba(37,99,235,0.25);
-      text-decoration: none; display: inline-block;
+    .hero-actions { display: flex; gap: 8px; align-items: center; }
+    .btn-ghost {
+      font-size: 12px; font-weight: 500;
+      padding: 8px 16px; border-radius: 5px;
+      border: 1px solid var(--line2); background: transparent;
+      color: var(--text); cursor: pointer; transition: all 0.15s;
+      display: inline-block;
     }
-    .cta-primary:hover { box-shadow: 0 0 36px rgba(37,99,235,0.45); transform: translateY(-1px); }
-    .cta-secondary {
-      font-family: var(--sans); font-size: 0.85rem; font-weight: 500;
-      padding: 11px 22px; border-radius: 7px;
-      background: transparent; border: 1px solid var(--line2);
-      color: var(--text2); cursor: pointer; transition: all 0.2s;
-      text-decoration: none; display: inline-block;
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+      transform: translateY(-1px);
     }
-    .cta-secondary:hover { border-color: var(--blue); color: var(--text); }
+    .btn-muted {
+      font-size: 12px; color: var(--text2);
+      padding: 8px 12px; transition: color 0.15s; display: inline-block;
+    }
+    .btn-muted:hover { color: var(--text); }
 
-    .badge-cluster {
-      display: flex; gap: 8px; flex-wrap: wrap; margin-top: 28px;
+    .meta-row {
+      display: flex; gap: 32px; align-items: center;
+      padding: 24px 0; border-bottom: 1px solid var(--line); flex-wrap: wrap;
     }
-    .tech-badge {
-      font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
-      padding: 4px 9px; border-radius: 4px;
-      border: 1px solid; letter-spacing: 0.04em;
+    .meta-item { display: flex; flex-direction: column; gap: 2px; }
+    .meta-val { font-size: 18px; font-weight: 600; letter-spacing: -0.03em; }
+    .meta-lbl { font-family: var(--mono); font-size: 10px; color: var(--text2); letter-spacing: 0.06em; }
+    .meta-divider { width: 1px; height: 28px; background: var(--line2); flex-shrink: 0; }
+    .status-pill {
+      font-family: var(--mono); font-size: 10px; font-weight: 500;
+      padding: 4px 8px; border-radius: 3px;
+      background: rgba(255,153,0,0.08); border: 1px solid rgba(255,153,0,0.18);
+      color: #ff9900; letter-spacing: 0.06em;
+      display: flex; align-items: center; gap: 5px;
     }
-    .tb-aws   { background: rgba(255,153,0,0.08); border-color: rgba(255,153,0,0.25); color: #fbbf24; }
-    .tb-kafka { background: rgba(255,255,255,0.03); border-color: var(--line2); color: var(--text2); }
-    .tb-mongo { background: rgba(34,197,94,0.07); border-color: rgba(34,197,94,0.2); color: #4ade80; }
-    .tb-spark { background: rgba(249,115,22,0.07); border-color: rgba(249,115,22,0.2); color: #fb923c; }
-    .tb-bi    { background: rgba(242,200,17,0.07); border-color: rgba(242,200,17,0.2); color: #fde047; }
-    .tb-docker{ background: rgba(36,150,237,0.07); border-color: rgba(36,150,237,0.2); color: #38bdf8; }
-
-    .pipeline-vis {
-      background: var(--bg2); border: 1px solid var(--line);
-      border-radius: 14px; padding: 24px; overflow: hidden;
+    .status-pill::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--aws); animation: pulse 2s infinite;
     }
-    .pv-title {
-      font-family: var(--mono); font-size: 0.65rem; color: var(--text2);
-      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .pv-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-    .pipeline-steps {
-      display: flex; flex-direction: column; gap: 0;
+    section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+    .sec-label {
+      font-family: var(--mono); font-size: 10px; font-weight: 500;
+      color: var(--text2); letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 32px;
     }
-    .ps-item {
-      display: grid; grid-template-columns: 32px 1fr;
-      gap: 12px; align-items: start;
-    }
-    .ps-connector {
-      display: flex; flex-direction: column; align-items: center;
-    }
-    .ps-icon {
-      width: 32px; height: 32px; border-radius: 8px;
-      display: grid; place-items: center; font-size: 14px;
-      flex-shrink: 0;
-    }
-    .ps-line {
-      width: 1px; height: 20px;
-      background: linear-gradient(180deg, var(--line2), transparent);
-      margin: 3px 0;
-    }
-    .ps-content { padding-bottom: 8px; }
-    .ps-label {
-      font-family: var(--mono); font-size: 0.7rem; font-weight: 500;
-      color: var(--text); margin-bottom: 2px;
-    }
-    .ps-sub { font-size: 0.72rem; color: var(--text2); line-height: 1.5; }
 
-    .stats-bar {
+    .pipeline {
       display: grid; grid-template-columns: repeat(5, 1fr);
-      gap: 1px; background: var(--line);
-      border: 1px solid var(--line); border-radius: 12px;
-      overflow: hidden; margin: 0 0 60px;
+      border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
     }
-    .stat-item {
-      background: var(--bg2); padding: 20px 16px; text-align: center;
-      transition: background 0.2s;
+    .pipe-step {
+      padding: 20px 16px; background: var(--bg2);
+      border-right: 1px solid var(--line);
+      display: flex; flex-direction: column; gap: 8px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
     }
-    .stat-item:hover { background: var(--bg3); }
-    .stat-num {
-      font-size: 1.6rem; font-weight: 700; letter-spacing: -0.04em;
-      display: block; margin-bottom: 4px;
+    .pipe-step::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
     }
-    .stat-lbl { font-size: 0.72rem; color: var(--text2); letter-spacing: 0.02em; }
-    .c-aws { color: var(--aws); }
-    .c-blue { color: var(--blue); }
-    .c-teal { color: var(--teal); }
-    .c-green { color: var(--green); }
-    .c-purple { color: var(--purple); }
+    .pipe-step:last-child { border-right: none; }
+    .pipe-step:hover {
+      background: var(--bg3);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(6,10,18,0.32);
+    }
+    .pipe-step:hover::after { opacity: 1; }
+    .pipe-num { font-family: var(--mono); font-size: 9px; color: var(--text3); letter-spacing: 0.06em; }
+    .pipe-icon { font-size: 18px; line-height: 1; }
+    .pipe-name { font-size: 12px; font-weight: 500; }
+    .pipe-desc { font-size: 11px; color: var(--text2); line-height: 1.6; }
+    .pipe-tag { font-family: var(--mono); font-size: 9px; color: var(--text3); margin-top: 4px; }
 
-    .sec-head {
-      display: flex; align-items: flex-end; justify-content: space-between;
-      gap: 16px; margin-bottom: 24px; flex-wrap: wrap;
-    }
-    .sec-eyebrow {
-      font-family: var(--mono); font-size: 0.65rem; color: var(--blue);
-      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px;
-    }
-    .sec-title { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.03em; }
-
-    .arch-section { margin-bottom: 64px; }
-    .arch-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
-    }
-    .arch-card {
-      background: var(--bg2); border: 1px solid var(--line);
-      border-radius: 12px; padding: 20px;
-      display: flex; flex-direction: column; gap: 12px;
-      transition: all 0.2s;
-      border-top: 2px solid transparent;
-    }
-    .arch-card:hover { background: var(--bg3); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
-    .at-aws   { border-top-color: var(--aws); }
-    .at-blue  { border-top-color: var(--blue); }
-    .at-green { border-top-color: var(--green); }
-    .at-teal  { border-top-color: var(--teal); }
-    .at-mongo { border-top-color: #4ade80; }
-    .at-bi    { border-top-color: #fde047; }
-
-    .arch-icon {
-      width: 42px; height: 42px; border-radius: 10px;
-      display: grid; place-items: center; font-size: 20px;
-      background: var(--bg4);
-    }
-    .arch-layer {
-      font-family: var(--mono); font-size: 0.62rem;
-      color: var(--text2); letter-spacing: 0.08em; text-transform: uppercase;
-    }
-    .arch-name { font-size: 0.95rem; font-weight: 600; margin-top: 2px; }
-    .arch-desc { font-size: 0.8rem; color: var(--text2); line-height: 1.65; flex: 1; }
-    .arch-tags { display: flex; gap: 5px; flex-wrap: wrap; }
-    .arch-tag {
-      font-family: var(--mono); font-size: 0.6rem; padding: 3px 7px;
-      border-radius: 4px; background: var(--bg4); border: 1px solid var(--line);
-      color: var(--text2); letter-spacing: 0.03em;
-    }
-
-    .medallion-section { margin-bottom: 64px; }
-    .medallion-flow {
+    .medallion {
       display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 0; background: var(--line);
-      border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+      gap: 1px; background: var(--line);
+      border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
     }
-    .medal-zone {
-      padding: 28px 24px; background: var(--bg2);
-      transition: background 0.2s;
+    .medal {
+      background: var(--bg2);
+      padding: 28px 24px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
     }
-    .medal-zone:hover { background: var(--bg3); }
-    .medal-zone + .medal-zone {
-      border-left: 1px solid var(--line);
+    .medal::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.12), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
     }
-    .mz-label {
-      font-family: var(--mono); font-size: 0.62rem; font-weight: 500;
-      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px;
+    .medal:hover {
+      background: var(--bg3);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(6,10,18,0.32);
     }
-    .mz-bronze .mz-label { color: #d97706; }
-    .mz-silver .mz-label { color: #94a3b8; }
-    .mz-gold   .mz-label { color: #eab308; }
-    .mz-zone-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
-    .mz-format {
-      font-family: var(--mono); font-size: 0.7rem; margin-bottom: 12px;
-      padding: 4px 8px; border-radius: 4px; display: inline-block;
+    .medal:hover::after { opacity: 1; }
+    .medal-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .medal-name { font-size: 13px; font-weight: 500; }
+    .medal-format {
+      font-family: var(--mono); font-size: 9px;
+      padding: 3px 6px; border-radius: 3px; border: 1px solid;
     }
-    .mz-bronze .mz-format { background: rgba(217,119,6,0.1); color: #fbbf24; border: 1px solid rgba(217,119,6,0.2); }
-    .mz-silver .mz-format { background: rgba(148,163,184,0.1); color: #cbd5e1; border: 1px solid rgba(148,163,184,0.2); }
-    .mz-gold   .mz-format { background: rgba(234,179,8,0.1); color: #fde047; border: 1px solid rgba(234,179,8,0.2); }
-    .mz-desc { font-size: 0.8rem; color: var(--text2); line-height: 1.7; }
+    .bronze .medal-format { background: rgba(180,100,0,0.08); border-color: rgba(180,100,0,0.2); color: #c27c2a; }
+    .silver .medal-format { background: rgba(160,160,160,0.08); border-color: rgba(160,160,160,0.2); color: #aaa; }
+    .gold   .medal-format { background: rgba(200,160,0,0.08); border-color: rgba(200,160,0,0.2); color: #c8a32a; }
+    .medal-zone { font-family: var(--mono); font-size: 9px; color: var(--text2); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+    .medal-desc { font-size: 12px; color: var(--text2); line-height: 1.7; font-weight: 300; }
 
-    .team-section { margin-bottom: 64px; }
+    .stack-table { width: 100%; border-collapse: collapse; }
+    .stack-table tr { border-bottom: 1px solid var(--line); transition: background 0.12s; }
+    .stack-table tr:last-child { border-bottom: none; }
+    .stack-table tr:hover td {
+      background: var(--bg2);
+      color: var(--text);
+    }
+    .stack-table td { padding: 14px 8px; vertical-align: middle; }
+    .stack-table td:first-child { width: 110px; padding-left: 0; }
+    .stack-table td:nth-child(2) { width: 200px; font-weight: 500; font-size: 13px; }
+    .stack-table td:last-child { color: var(--text2); font-size: 12px; font-weight: 300; }
+    .layer-tag {
+      font-family: var(--mono); font-size: 9px; font-weight: 500;
+      padding: 3px 7px; border-radius: 3px; border: 1px solid;
+      letter-spacing: 0.05em; white-space: nowrap; display: inline-block;
+    }
+    .lt-source   { background: rgba(34,197,94,0.05); border-color: rgba(34,197,94,0.15); color: #4ade80; }
+    .lt-ingest   { background: rgba(255,255,255,0.03); border-color: var(--line2); color: var(--text2); }
+    .lt-process  { background: rgba(255,153,0,0.05); border-color: rgba(255,153,0,0.15); color: #ffa040; }
+    .lt-storage  { background: rgba(255,153,0,0.05); border-color: rgba(255,153,0,0.15); color: #ffa040; }
+    .lt-catalog  { background: rgba(138,90,255,0.05); border-color: rgba(138,90,255,0.15); color: #a78bfa; }
+    .lt-analytics{ background: rgba(68,136,255,0.05); border-color: rgba(68,136,255,0.15); color: #7ab0ff; }
+
     .team-grid {
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
     }
     .team-card {
-      background: var(--bg2); border: 1px solid var(--line);
-      border-radius: 12px; padding: 20px 14px;
-      display: flex; flex-direction: column; align-items: center;
-      gap: 10px; text-align: center; transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+      padding: 14px 10px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      transition: transform 0.2s, border-color 0.2s, background 0.2s;
     }
-    .team-card:hover { background: var(--bg3); border-color: var(--line2); transform: translateY(-2px); }
+    .team-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--line2);
+      background: rgba(255,255,255,0.03);
+    }
     .team-avatar {
-      width: 72px; height: 72px; border-radius: 50%;
-      border: 2px solid var(--line2);
-      object-fit: cover; overflow: hidden;
-      background: var(--bg4);
+      width: 64px; height: 64px; border-radius: 50%;
+      border: 1px solid var(--line2); overflow: hidden; background: var(--bg3);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     }
-    .team-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-    .team-name { font-size: 0.85rem; font-weight: 600; }
-
-    .tech-section { margin-bottom: 64px; }
-    .tech-table {
-      width: 100%; border-collapse: collapse;
-      background: var(--bg2); border-radius: 12px; overflow: hidden;
-      border: 1px solid var(--line);
+    .team-card:hover .team-avatar {
+      transform: scale(1.04);
+      border-color: rgba(255,255,255,0.35);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.28);
     }
-    .tech-table th {
-      font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--text2); padding: 12px 18px; text-align: left;
-      border-bottom: 1px solid var(--line); background: var(--bg3);
-    }
-    .tech-table td {
-      padding: 14px 18px; font-size: 0.82rem;
-      border-bottom: 1px solid var(--line);
-      vertical-align: middle;
-    }
-    .tech-table tr:last-child td { border-bottom: none; }
-    .tech-table tr:hover td { background: var(--bg3); }
-    .layer-pill {
-      font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
-      padding: 4px 8px; border-radius: 4px;
-      border: 1px solid; white-space: nowrap;
-    }
-    .lp-source  { background: rgba(34,197,94,0.07); border-color: rgba(34,197,94,0.2); color: #4ade80; }
-    .lp-ingest  { background: rgba(255,255,255,0.04); border-color: var(--line2); color: var(--text2); }
-    .lp-process { background: rgba(255,153,0,0.08); border-color: rgba(255,153,0,0.25); color: #fbbf24; }
-    .lp-storage { background: rgba(255,153,0,0.08); border-color: rgba(255,153,0,0.25); color: #fbbf24; }
-    .lp-catalog { background: rgba(139,92,246,0.07); border-color: rgba(139,92,246,0.2); color: #a78bfa; }
-    .lp-analytics { background: rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.2); color: #93c5fd; }
-
-    .tech-name { font-weight: 600; }
-    .tech-fn { color: var(--text2); font-size: 0.8rem; }
-
-    .status-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
-      padding: 4px 10px; border-radius: 4px;
-      background: rgba(234,179,8,0.08); border: 1px solid rgba(234,179,8,0.2);
-      color: #fde047;
-    }
-    .status-dot { width: 5px; height: 5px; border-radius: 50%; background: #fde047; animation: pulse 2s infinite; }
+    .team-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .team-name { font-size: 12px; font-weight: 500; }
 
     footer {
-      border-top: 1px solid var(--line); padding: 28px 0;
-      display: flex; justify-content: space-between; align-items: center;
-      gap: 16px; flex-wrap: wrap;
+      padding: 28px 0; border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
     }
-    .footer-left { font-family: var(--mono); font-size: 0.7rem; color: var(--text2); }
-    .footer-right { font-family: var(--mono); font-size: 0.65rem; color: var(--text3); }
+    .footer-l { font-family: var(--mono); font-size: 10px; color: var(--text2); }
+    .footer-r { font-family: var(--mono); font-size: 10px; color: var(--text3); }
 
-    @media(max-width:980px){
-      .hero { grid-template-columns: 1fr; }
-      .pipeline-vis { display: none; }
-      .arch-grid { grid-template-columns: repeat(2,1fr); }
+    @media(max-width:860px){
+      .pipeline { grid-template-columns: 1fr 1fr; }
+      .pipe-step { border-bottom: 1px solid var(--line); }
       .team-grid { grid-template-columns: repeat(3,1fr); }
-      .stats-bar { grid-template-columns: repeat(3,1fr); }
+      .medallion { grid-template-columns: 1fr; gap: 0; }
+      .medal { border-bottom: 1px solid var(--line); }
     }
-    @media(max-width:640px){
-      .arch-grid,.medallion-flow { grid-template-columns: 1fr; }
+    @media(max-width:540px){
+      .pipeline { grid-template-columns: 1fr; }
       .team-grid { grid-template-columns: repeat(2,1fr); }
-      .medallion-flow { background: none; border: none; gap: 12px; }
-      .medal-zone { border-radius: 12px; border: 1px solid var(--line); }
-      .medal-zone + .medal-zone { border-left: 1px solid var(--line); }
-      .stats-bar { grid-template-columns: repeat(2,1fr); }
+      .meta-divider { display: none; }
+      .meta-row { gap: 20px; }
     }
   </style>
 </head>
 <body>
-  <div class="glow-top"></div>
-  <div class="glow-right"></div>
 
   <nav>
     <div class="shell nav-inner">
-      <div class="logo">
-        <div class="logo-mark">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
-            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
-          </svg>
-        </div>
-        <div>
-          <div class="logo-name">Tour4Friends Analytics</div>
-          <div class="logo-tag">DATA LAKE · MVP · ELT</div>
-        </div>
+      <div>
+        <div class="logo-text">Tour4Friends Analytics</div>
+        <div class="logo-sub">DATA LAKE · ELT · MVP</div>
       </div>
       <div class="nav-links">
-        <a class="nav-btn" href="#arquitetura">Arquitetura</a>
+        <a class="nav-btn" href="#pipeline">Pipeline</a>
+        <a class="nav-btn" href="#stack">Stack</a>
         <a class="nav-btn" href="#time">Time</a>
-        <a class="nav-btn primary" href="https://github.com/Thiago-code-lab/tour4friends-datalake" target="_blank" rel="noreferrer">GitHub →</a>
+        <a class="nav-btn primary" href="https://github.com/Thiago-code-lab" target="_blank">GitHub →</a>
       </div>
     </div>
   </nav>
 
   <div class="shell">
-    <section class="hero">
-      <div>
-        <div class="hero-eyebrow">Projeto Integrador · 2025</div>
-        <h1>Data Lake para <em>Turismo Inteligente</em></h1>
-        <p class="hero-desc">
-          Uma arquitetura moderna de ELT que transforma dados brutos de reservas e interacoes da plataforma Tour4Friends em inteligencia estrategica de negocios, da ingestao em tempo real ate os dashboards analiticos.
-        </p>
-        <div class="hero-ctas">
-          <a class="cta-primary" href="https://github.com/Thiago-code-lab/tour4friends-datalake" target="_blank" rel="noreferrer">Ver Repositorio</a>
-          <a class="cta-secondary" href="#arquitetura">Explorar Arquitetura</a>
-        </div>
-        <div class="badge-cluster">
-          <span class="tech-badge tb-aws">AWS S3</span>
-          <span class="tech-badge tb-aws">AWS Glue</span>
-          <span class="tech-badge tb-aws">Athena</span>
-          <span class="tech-badge tb-kafka">Apache Kafka</span>
-          <span class="tech-badge tb-mongo">MongoDB</span>
-          <span class="tech-badge tb-spark">PySpark</span>
-          <span class="tech-badge tb-docker">Docker</span>
-          <span class="tech-badge tb-bi">Power BI</span>
-        </div>
-      </div>
 
-      <div class="pipeline-vis">
-        <div class="pv-title"><span class="pv-dot"></span>Pipeline em producao</div>
-        <div class="pipeline-steps">
-          <div class="ps-item">
-            <div class="ps-connector">
-              <div class="ps-icon" style="background:rgba(34,197,94,0.1);">🗃️</div>
-              <div class="ps-line"></div>
-            </div>
-            <div class="ps-content">
-              <div class="ps-label">MongoDB (Fonte)</div>
-              <div class="ps-sub">Banco NoSQL operacional de reservas e interacoes em tempo real.</div>
-            </div>
-          </div>
-
-          <div class="ps-item">
-            <div class="ps-connector">
-              <div class="ps-icon" style="background:rgba(255,255,255,0.04);">⚡</div>
-              <div class="ps-line"></div>
-            </div>
-            <div class="ps-content">
-              <div class="ps-label">Kafka + CDC</div>
-              <div class="ps-sub">Change Data Capture captura eventos e publica em topicos Kafka.</div>
-            </div>
-          </div>
-
-          <div class="ps-item">
-            <div class="ps-connector">
-              <div class="ps-icon" style="background:rgba(255,153,0,0.1);">🪣</div>
-              <div class="ps-line"></div>
-            </div>
-            <div class="ps-content">
-              <div class="ps-label">S3 - Raw Zone (Bronze)</div>
-              <div class="ps-sub">Kafka Connect realiza o load direto no S3 em JSON.</div>
-            </div>
-          </div>
-
-          <div class="ps-item">
-            <div class="ps-connector">
-              <div class="ps-icon" style="background:rgba(255,153,0,0.1);">⚙️</div>
-              <div class="ps-line"></div>
-            </div>
-            <div class="ps-content">
-              <div class="ps-label">AWS Glue - Spark</div>
-              <div class="ps-sub">Transformacao, limpeza, tipagem e conversao para Parquet (Silver para Gold).</div>
-            </div>
-          </div>
-
-          <div class="ps-item">
-            <div class="ps-connector">
-              <div class="ps-icon" style="background:rgba(59,130,246,0.1);">📊</div>
-            </div>
-            <div class="ps-content">
-              <div class="ps-label">Athena + Power BI</div>
-              <div class="ps-sub">SQL serverless sobre S3 com dashboards analiticos no Power BI.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="stats-bar">
-      <div class="stat-item">
-        <span class="stat-num c-green">3</span>
-        <span class="stat-lbl">Camadas Medallion</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num c-aws">6</span>
-        <span class="stat-lbl">Tecnologias AWS</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num c-blue">ELT</span>
-        <span class="stat-lbl">Arquitetura</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num c-teal">CDC</span>
-        <span class="stat-lbl">Ingestao em tempo real</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num c-purple">5</span>
-        <span class="stat-lbl">Integrantes</span>
+    <div class="hero">
+      <div class="hero-eyebrow">Projeto Integrador · 2025</div>
+      <h1>Data Lake para <strong>turismo inteligente</strong></h1>
+      <p class="hero-desc">Pipeline ELT que transforma dados operacionais da plataforma Tour4Friends em inteligência de negócios — da ingestão em tempo real no Kafka até os dashboards no Power BI.</p>
+      <div class="hero-actions">
+        <a class="btn-ghost" href="https://github.com/Thiago-code-lab" target="_blank">Ver repositório</a>
+        <a class="btn-muted" href="#pipeline">Explorar arquitetura ↓</a>
       </div>
     </div>
 
-    <section class="arch-section" id="arquitetura">
-      <div class="sec-head">
-        <div>
-          <div class="sec-eyebrow">Stack Tecnico</div>
-          <div class="sec-title">Componentes da Arquitetura</div>
-        </div>
-        <span class="status-badge"><span class="status-dot"></span>Em Desenvolvimento</span>
-      </div>
+    <div class="meta-row">
+      <div class="meta-item"><span class="meta-val">ELT</span><span class="meta-lbl">Arquitetura</span></div>
+      <div class="meta-divider"></div>
+      <div class="meta-item"><span class="meta-val">3</span><span class="meta-lbl">Camadas Medallion</span></div>
+      <div class="meta-divider"></div>
+      <div class="meta-item"><span class="meta-val">CDC</span><span class="meta-lbl">Ingestão real-time</span></div>
+      <div class="meta-divider"></div>
+      <div class="meta-item"><span class="meta-val">6</span><span class="meta-lbl">Componentes AWS</span></div>
+      <div class="meta-divider"></div>
+      <span class="status-pill">Em Desenvolvimento</span>
+    </div>
 
-      <div class="arch-grid">
-        <div class="arch-card at-green">
-          <div class="arch-icon">🗃️</div>
-          <div>
-            <div class="arch-layer">Fonte</div>
-            <div class="arch-name">MongoDB</div>
-          </div>
-          <p class="arch-desc">Banco NoSQL operacional que armazena registros de viagens, reservas e interacoes de usuarios da plataforma Tour4Friends.</p>
-          <div class="arch-tags">
-            <span class="arch-tag">NoSQL</span>
-            <span class="arch-tag">CDC</span>
-            <span class="arch-tag">Operacional</span>
-          </div>
+    <section id="pipeline">
+      <div class="sec-label">Fluxo de dados</div>
+      <div class="pipeline">
+        <div class="pipe-step">
+          <div class="pipe-num">01</div>
+          <div class="pipe-icon">🗃️</div>
+          <div class="pipe-name">MongoDB</div>
+          <div class="pipe-desc">Banco NoSQL operacional. Fonte de reservas e interações.</div>
+          <div class="pipe-tag">EXTRACT</div>
         </div>
-
-        <div class="arch-card at-blue">
-          <div class="arch-icon">⚡</div>
-          <div>
-            <div class="arch-layer">Ingestao</div>
-            <div class="arch-name">Apache Kafka</div>
-          </div>
-          <p class="arch-desc">Barramento de streaming para processamento de eventos em tempo real, com carga direta no S3 via Kafka Connect.</p>
-          <div class="arch-tags">
-            <span class="arch-tag">Streaming</span>
-            <span class="arch-tag">Kafka Connect</span>
-            <span class="arch-tag">Tempo Real</span>
-          </div>
+        <div class="pipe-step">
+          <div class="pipe-num">02</div>
+          <div class="pipe-icon">⚡</div>
+          <div class="pipe-name">Apache Kafka</div>
+          <div class="pipe-desc">CDC captura eventos. Kafka Connect faz Load direto no S3.</div>
+          <div class="pipe-tag">STREAMING · CDC</div>
         </div>
-
-        <div class="arch-card at-aws">
-          <div class="arch-icon">🪣</div>
-          <div>
-            <div class="arch-layer">Armazenamento</div>
-            <div class="arch-name">Amazon S3</div>
-          </div>
-          <p class="arch-desc">Data Lake escalavel organizado em camadas Medallion (Bronze, Silver e Gold) para refinamento progressivo dos dados.</p>
-          <div class="arch-tags">
-            <span class="arch-tag">Data Lake</span>
-            <span class="arch-tag">Parquet</span>
-            <span class="arch-tag">JSON</span>
-          </div>
+        <div class="pipe-step">
+          <div class="pipe-num">03</div>
+          <div class="pipe-icon">🪣</div>
+          <div class="pipe-name">Amazon S3</div>
+          <div class="pipe-desc">Data Lake em camadas Medallion. Dados brutos em JSON.</div>
+          <div class="pipe-tag">LOAD · BRONZE</div>
         </div>
-
-        <div class="arch-card at-aws">
-          <div class="arch-icon">⚙️</div>
-          <div>
-            <div class="arch-layer">Processamento</div>
-            <div class="arch-name">AWS Glue (Spark)</div>
-          </div>
-          <p class="arch-desc">Engine Spark serverless para limpeza, tipagem e conversao de formatos nas transformacoes das camadas Silver e Gold.</p>
-          <div class="arch-tags">
-            <span class="arch-tag">Spark</span>
-            <span class="arch-tag">PySpark</span>
-            <span class="arch-tag">ETL</span>
-          </div>
+        <div class="pipe-step">
+          <div class="pipe-num">04</div>
+          <div class="pipe-icon">⚙️</div>
+          <div class="pipe-name">AWS Glue</div>
+          <div class="pipe-desc">Spark serverless. Limpeza e conversão para Parquet.</div>
+          <div class="pipe-tag">TRANSFORM · SPARK</div>
         </div>
-
-        <div class="arch-card at-teal">
-          <div class="arch-icon">📋</div>
-          <div>
-            <div class="arch-layer">Catalogo</div>
-            <div class="arch-name">Glue Data Catalog</div>
-          </div>
-          <p class="arch-desc">Repositorio central de metadados para governanca e descoberta de dados, integrado ao Athena para consultas SQL.</p>
-          <div class="arch-tags">
-            <span class="arch-tag">Metadados</span>
-            <span class="arch-tag">Governanca</span>
-            <span class="arch-tag">Schema</span>
-          </div>
-        </div>
-
-        <div class="arch-card at-bi">
-          <div class="arch-icon">📊</div>
-          <div>
-            <div class="arch-layer">Analytics</div>
-            <div class="arch-name">Athena + Power BI</div>
-          </div>
-          <p class="arch-desc">Athena executa SQL serverless no S3 e alimenta dashboards estrategicos no Power BI para tomada de decisao.</p>
-          <div class="arch-tags">
-            <span class="arch-tag">SQL Serverless</span>
-            <span class="arch-tag">Dashboard</span>
-            <span class="arch-tag">Analytics</span>
-          </div>
+        <div class="pipe-step">
+          <div class="pipe-num">05</div>
+          <div class="pipe-icon">📊</div>
+          <div class="pipe-name">Athena + Power BI</div>
+          <div class="pipe-desc">SQL serverless sobre S3. Dashboards estratégicos.</div>
+          <div class="pipe-tag">ANALYTICS</div>
         </div>
       </div>
     </section>
 
-    <section class="medallion-section">
-      <div class="sec-head">
-        <div>
-          <div class="sec-eyebrow">Data Lake</div>
-          <div class="sec-title">Medallion Architecture</div>
+    <section>
+      <div class="sec-label">Medallion Architecture</div>
+      <div class="medallion">
+        <div class="medal bronze">
+          <div class="medal-top"><div class="medal-name">Raw Zone</div><span class="medal-format">JSON</span></div>
+          <div class="medal-zone">Bronze · Camada 01</div>
+          <p class="medal-desc">Eventos originais extraídos via CDC. Dados brutos sem transformação — fonte da verdade imutável do pipeline.</p>
         </div>
-      </div>
-      <div class="medallion-flow">
-        <div class="medal-zone mz-bronze">
-          <div class="mz-label">Camada 01</div>
-          <div class="mz-zone-name">Raw Zone</div>
-          <div class="mz-format">Bronze - JSON</div>
-          <p class="mz-desc">Eventos originais extraidos do MongoDB via CDC, armazenados sem transformacao como fonte da verdade do pipeline.</p>
+        <div class="medal silver">
+          <div class="medal-top"><div class="medal-name">Processed Zone</div><span class="medal-format">Parquet</span></div>
+          <div class="medal-zone">Silver · Camada 02</div>
+          <p class="medal-desc">Dados limpos, tipados e convertidos via AWS Glue. Schema validado e particionado para queries eficientes.</p>
         </div>
-        <div class="medal-zone mz-silver">
-          <div class="mz-label">Camada 02</div>
-          <div class="mz-zone-name">Processed Zone</div>
-          <div class="mz-format">Silver - Parquet</div>
-          <p class="mz-desc">Dados limpos, tipados e convertidos para formato colunar via AWS Glue, com schema validado e particionamento eficiente.</p>
-        </div>
-        <div class="medal-zone mz-gold">
-          <div class="mz-label">Camada 03</div>
-          <div class="mz-zone-name">Curated Zone</div>
-          <div class="mz-format">Gold - Agregado</div>
-          <p class="mz-desc">Tabelas agregadas com regras de negocio aplicadas, prontas para analise estrategica no Athena e consumo no Power BI.</p>
+        <div class="medal gold">
+          <div class="medal-top"><div class="medal-name">Curated Zone</div><span class="medal-format">Agregado</span></div>
+          <div class="medal-zone">Gold · Camada 03</div>
+          <p class="medal-desc">Tabelas com regras de negócio aplicadas, prontas para consumo pelo Athena e Power BI.</p>
         </div>
       </div>
     </section>
 
-    <section class="tech-section">
-      <div class="sec-head">
-        <div>
-          <div class="sec-eyebrow">Referencia</div>
-          <div class="sec-title">Matriz de Componentes</div>
-        </div>
-      </div>
-      <table class="tech-table">
-        <thead>
-          <tr>
-            <th>Camada</th>
-            <th>Tecnologia</th>
-            <th>Funcao</th>
-          </tr>
-        </thead>
+    <section id="stack">
+      <div class="sec-label">Componentes tecnológicos</div>
+      <table class="stack-table">
         <tbody>
           <tr>
-            <td><span class="layer-pill lp-source">Fonte</span></td>
-            <td><span class="tech-name">MongoDB</span></td>
-            <td class="tech-fn">Banco NoSQL operacional para registros de viagens e reservas</td>
+            <td><span class="layer-tag lt-source">Fonte</span></td>
+            <td>MongoDB</td>
+            <td>Banco NoSQL operacional para registros de viagens e reservas</td>
           </tr>
           <tr>
-            <td><span class="layer-pill lp-ingest">Ingestao</span></td>
-            <td><span class="tech-name">Apache Kafka</span></td>
-            <td class="tech-fn">Barramento de streaming para processamento de eventos em tempo real</td>
+            <td><span class="layer-tag lt-ingest">Ingestão</span></td>
+            <td>Apache Kafka</td>
+            <td>Streaming de eventos em tempo real via Change Data Capture</td>
           </tr>
           <tr>
-            <td><span class="layer-pill lp-process">Processamento</span></td>
-            <td><span class="tech-name">AWS Glue (Spark)</span></td>
-            <td class="tech-fn">Engine para transformacao de dados e conversao JSON para Parquet</td>
+            <td><span class="layer-tag lt-process">Processamento</span></td>
+            <td>AWS Glue (Spark)</td>
+            <td>Transformação e conversão de formatos JSON → Parquet</td>
           </tr>
           <tr>
-            <td><span class="layer-pill lp-storage">Armazenamento</span></td>
-            <td><span class="tech-name">Amazon S3</span></td>
-            <td class="tech-fn">Data Lake escalavel organizado em camadas Medallion</td>
+            <td><span class="layer-tag lt-storage">Armazenamento</span></td>
+            <td>Amazon S3</td>
+            <td>Data Lake escalável organizado em camadas Medallion</td>
           </tr>
           <tr>
-            <td><span class="layer-pill lp-catalog">Catalogo</span></td>
-            <td><span class="tech-name">Glue Data Catalog</span></td>
-            <td class="tech-fn">Repositorio central de metadados para governanca e descoberta</td>
+            <td><span class="layer-tag lt-catalog">Catálogo</span></td>
+            <td>Glue Data Catalog</td>
+            <td>Repositório central de metadados para governança e descoberta</td>
           </tr>
           <tr>
-            <td><span class="layer-pill lp-analytics">Analytics</span></td>
-            <td><span class="tech-name">Amazon Athena + Power BI</span></td>
-            <td class="tech-fn">SQL serverless sobre S3 com dashboards estrategicos</td>
+            <td><span class="layer-tag lt-analytics">Analytics</span></td>
+            <td>Athena + Power BI</td>
+            <td>SQL serverless sobre S3 com dashboards estratégicos</td>
           </tr>
         </tbody>
       </table>
     </section>
 
-    <section class="team-section" id="time">
-      <div class="sec-head">
-        <div>
-          <div class="sec-eyebrow">Projeto Integrador</div>
-          <div class="sec-title">Time</div>
-        </div>
-      </div>
+    <section id="time">
+      <div class="sec-label">Time</div>
       <div class="team-grid">
         <div class="team-card">
-          <div class="team-avatar">
-            <img src="https://avatars.githubusercontent.com/u/125063071?v=4" alt="Pablo Roberto">
-          </div>
+          <div class="team-avatar"><img src="https://avatars.githubusercontent.com/u/125063071?v=4" alt="Pablo Roberto" loading="lazy"></div>
           <div class="team-name">Pablo Roberto</div>
         </div>
         <div class="team-card">
-          <div class="team-avatar">
-            <img src="https://avatars.githubusercontent.com/u/198763242?v=4" alt="Lucas Antonio">
-          </div>
+          <div class="team-avatar"><img src="https://avatars.githubusercontent.com/u/198763242?v=4" alt="Lucas Antonio" loading="lazy"></div>
           <div class="team-name">Lucas Antonio</div>
         </div>
         <div class="team-card">
-          <div class="team-avatar">
-            <img src="https://github.com/user-attachments/assets/24b362a2-ee92-46aa-8d93-94d119dafabe" alt="Thiago Cardoso">
-          </div>
+          <div class="team-avatar"><img src="https://media.licdn.com/dms/image/v2/D4D03AQHJd1xye5u9Yg/profile-displayphoto-scale_400_400/B4DZzakxA5KEAk-/0/1773193598935?e=1775088000&v=beta&t=yB0D7ALws6vPfVz1fiadNPohfxuBDF3OLI66jyp2KR4" alt="Thiago Cardoso" loading="lazy"></div>
           <div class="team-name">Thiago Cardoso</div>
         </div>
         <div class="team-card">
-          <div class="team-avatar">
-            <img src="https://media.licdn.com/dms/image/v2/C4D03AQFgxzNm-DDZUg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1619123196498?e=1774483200&v=beta&t=2e1mPIFrfhDSjsOC8In234xJ_rkyJ5cRLbjxfDiZhUo" alt="William Nunes">
-          </div>
+          <div class="team-avatar"><img src="https://media.licdn.com/dms/image/v2/C4D03AQFgxzNm-DDZUg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1619123196498?e=1774483200&v=beta&t=2e1mPIFrfhDSjsOC8In234xJ_rkyJ5cRLbjxfDiZhUo" alt="William Nunes" loading="lazy"></div>
           <div class="team-name">William Nunes</div>
         </div>
         <div class="team-card">
-          <div class="team-avatar">
-            <img src="https://github.com/user-attachments/assets/f101196a-348f-42e8-ba32-e977bec686b0" alt="Daniel Fernando">
-          </div>
+          <div class="team-avatar"><img src="https://github.com/user-attachments/assets/f101196a-348f-42e8-ba32-e977bec686b0" alt="Daniel Fernando" loading="lazy"></div>
           <div class="team-name">Daniel Fernando</div>
         </div>
       </div>
     </section>
+
   </div>
 
   <footer>
-    <div class="shell" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-      <div class="footer-left">Tour4Friends Analytics - Data Lake MVP - 2025</div>
-      <div class="footer-right">MongoDB - Kafka - AWS Glue - S3 - Athena - Power BI</div>
+    <div class="shell" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;width:100%">
+      <span class="footer-l">Tour4Friends Analytics · Data Lake MVP · 2025</span>
+      <span class="footer-r">MongoDB · Kafka · AWS Glue · S3 · Athena · Power BI</span>
     </div>
   </footer>
+
 </body>
 </html>
