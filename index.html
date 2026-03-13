@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tour4Friends Analytics · Data Lake</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:      #05080f;
+      --bg2:     #090d18;
+      --bg3:     #0d1120;
+      --bg4:     #111827;
+      --line:    rgba(255,255,255,0.06);
+      --line2:   rgba(255,255,255,0.12);
+      --aws:     #FF9900;
+      --blue:    #3b82f6;
+      --teal:    #14b8a6;
+      --green:   #22c55e;
+      --purple:  #8b5cf6;
+      --text:    #f0f4ff;
+      --text2:   #6b7a99;
+      --text3:   #2d3650;
+      --mono:    'IBM Plex Mono', monospace;
+      --sans:    'Space Grotesk', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .glow-top {
+      position: fixed; top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 500px;
+      background: radial-gradient(ellipse, rgba(59,130,246,0.07) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+    .glow-right {
+      position: fixed; top: 40%; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(ellipse, rgba(255,153,0,0.05) 0%, transparent 60%);
+      pointer-events: none; z-index: 0;
+    }
+
+    * { position: relative; z-index: 1; }
+    body::before, .glow-top, .glow-right { z-index: 0; }
+
+    .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    a { color: inherit; text-decoration: none; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(5,8,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      gap: 16px; padding: 16px 0;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .logo-mark {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
+      display: grid; place-items: center;
+      box-shadow: 0 0 24px rgba(59,130,246,0.3);
+      flex-shrink: 0;
+    }
+    .logo-mark svg { width: 20px; height: 20px; }
+    .logo-name {
+      font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em;
+    }
+    .logo-tag {
+      font-family: var(--mono); font-size: 0.65rem;
+      color: var(--text2); letter-spacing: 0.05em;
+    }
+    .nav-links { display: flex; gap: 6px; }
+    .nav-btn {
+      font-family: var(--sans); font-size: 0.75rem; font-weight: 500;
+      padding: 7px 14px; border-radius: 6px;
+      border: 1px solid var(--line2); background: transparent;
+      color: var(--text2); cursor: pointer; transition: all 0.18s;
+    }
+    .nav-btn:hover { border-color: var(--blue); color: var(--text); }
+    .nav-btn.primary {
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      border-color: transparent; color: #fff;
+      box-shadow: 0 0 20px rgba(37,99,235,0.3);
+    }
+    .nav-btn.primary:hover { box-shadow: 0 0 30px rgba(37,99,235,0.5); }
+
+    .hero {
+      padding: 80px 0 56px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 0.7rem; font-weight: 500;
+      color: var(--aws); letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 24px; height: 1px; background: var(--aws);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, #60a5fa, #38bdf8, #14b8a6);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero-desc {
+      font-size: 0.95rem; color: var(--text2); line-height: 1.8;
+      margin-bottom: 28px; max-width: 480px;
+    }
+    .hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; }
+    .cta-primary {
+      font-family: var(--sans); font-size: 0.85rem; font-weight: 600;
+      padding: 11px 22px; border-radius: 7px;
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      border: 1px solid rgba(59,130,246,0.4); color: #fff;
+      cursor: pointer; transition: all 0.2s;
+      box-shadow: 0 0 24px rgba(37,99,235,0.25);
+      text-decoration: none; display: inline-block;
+    }
+    .cta-primary:hover { box-shadow: 0 0 36px rgba(37,99,235,0.45); transform: translateY(-1px); }
+    .cta-secondary {
+      font-family: var(--sans); font-size: 0.85rem; font-weight: 500;
+      padding: 11px 22px; border-radius: 7px;
+      background: transparent; border: 1px solid var(--line2);
+      color: var(--text2); cursor: pointer; transition: all 0.2s;
+      text-decoration: none; display: inline-block;
+    }
+    .cta-secondary:hover { border-color: var(--blue); color: var(--text); }
+
+    .badge-cluster {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-top: 28px;
+    }
+    .tech-badge {
+      font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
+      padding: 4px 9px; border-radius: 4px;
+      border: 1px solid; letter-spacing: 0.04em;
+    }
+    .tb-aws   { background: rgba(255,153,0,0.08); border-color: rgba(255,153,0,0.25); color: #fbbf24; }
+    .tb-kafka { background: rgba(255,255,255,0.03); border-color: var(--line2); color: var(--text2); }
+    .tb-mongo { background: rgba(34,197,94,0.07); border-color: rgba(34,197,94,0.2); color: #4ade80; }
+    .tb-spark { background: rgba(249,115,22,0.07); border-color: rgba(249,115,22,0.2); color: #fb923c; }
+    .tb-bi    { background: rgba(242,200,17,0.07); border-color: rgba(242,200,17,0.2); color: #fde047; }
+    .tb-docker{ background: rgba(36,150,237,0.07); border-color: rgba(36,150,237,0.2); color: #38bdf8; }
+
+    .pipeline-vis {
+      background: var(--bg2); border: 1px solid var(--line);
+      border-radius: 14px; padding: 24px; overflow: hidden;
+    }
+    .pv-title {
+      font-family: var(--mono); font-size: 0.65rem; color: var(--text2);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .pv-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    .pipeline-steps {
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .ps-item {
+      display: grid; grid-template-columns: 32px 1fr;
+      gap: 12px; align-items: start;
+    }
+    .ps-connector {
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .ps-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      display: grid; place-items: center; font-size: 14px;
+      flex-shrink: 0;
+    }
+    .ps-line {
+      width: 1px; height: 20px;
+      background: linear-gradient(180deg, var(--line2), transparent);
+      margin: 3px 0;
+    }
+    .ps-content { padding-bottom: 8px; }
+    .ps-label {
+      font-family: var(--mono); font-size: 0.7rem; font-weight: 500;
+      color: var(--text); margin-bottom: 2px;
+    }
+    .ps-sub { font-size: 0.72rem; color: var(--text2); line-height: 1.5; }
+
+    .stats-bar {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 1px; background: var(--line);
+      border: 1px solid var(--line); border-radius: 12px;
+      overflow: hidden; margin: 0 0 60px;
+    }
+    .stat-item {
+      background: var(--bg2); padding: 20px 16px; text-align: center;
+      transition: background 0.2s;
+    }
+    .stat-item:hover { background: var(--bg3); }
+    .stat-num {
+      font-size: 1.6rem; font-weight: 700; letter-spacing: -0.04em;
+      display: block; margin-bottom: 4px;
+    }
+    .stat-lbl { font-size: 0.72rem; color: var(--text2); letter-spacing: 0.02em; }
+    .c-aws { color: var(--aws); }
+    .c-blue { color: var(--blue); }
+    .c-teal { color: var(--teal); }
+    .c-green { color: var(--green); }
+    .c-purple { color: var(--purple); }
+
+    .sec-head {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 16px; margin-bottom: 24px; flex-wrap: wrap;
+    }
+    .sec-eyebrow {
+      font-family: var(--mono); font-size: 0.65rem; color: var(--blue);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px;
+    }
+    .sec-title { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.03em; }
+
+    .arch-section { margin-bottom: 64px; }
+    .arch-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    }
+    .arch-card {
+      background: var(--bg2); border: 1px solid var(--line);
+      border-radius: 12px; padding: 20px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: all 0.2s;
+      border-top: 2px solid transparent;
+    }
+    .arch-card:hover { background: var(--bg3); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+    .at-aws   { border-top-color: var(--aws); }
+    .at-blue  { border-top-color: var(--blue); }
+    .at-green { border-top-color: var(--green); }
+    .at-teal  { border-top-color: var(--teal); }
+    .at-mongo { border-top-color: #4ade80; }
+    .at-bi    { border-top-color: #fde047; }
+
+    .arch-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      display: grid; place-items: center; font-size: 20px;
+      background: var(--bg4);
+    }
+    .arch-layer {
+      font-family: var(--mono); font-size: 0.62rem;
+      color: var(--text2); letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .arch-name { font-size: 0.95rem; font-weight: 600; margin-top: 2px; }
+    .arch-desc { font-size: 0.8rem; color: var(--text2); line-height: 1.65; flex: 1; }
+    .arch-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+    .arch-tag {
+      font-family: var(--mono); font-size: 0.6rem; padding: 3px 7px;
+      border-radius: 4px; background: var(--bg4); border: 1px solid var(--line);
+      color: var(--text2); letter-spacing: 0.03em;
+    }
+
+    .medallion-section { margin-bottom: 64px; }
+    .medallion-flow {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0; background: var(--line);
+      border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+    }
+    .medal-zone {
+      padding: 28px 24px; background: var(--bg2);
+      transition: background 0.2s;
+    }
+    .medal-zone:hover { background: var(--bg3); }
+    .medal-zone + .medal-zone {
+      border-left: 1px solid var(--line);
+    }
+    .mz-label {
+      font-family: var(--mono); font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .mz-bronze .mz-label { color: #d97706; }
+    .mz-silver .mz-label { color: #94a3b8; }
+    .mz-gold   .mz-label { color: #eab308; }
+    .mz-zone-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+    .mz-format {
+      font-family: var(--mono); font-size: 0.7rem; margin-bottom: 12px;
+      padding: 4px 8px; border-radius: 4px; display: inline-block;
+    }
+    .mz-bronze .mz-format { background: rgba(217,119,6,0.1); color: #fbbf24; border: 1px solid rgba(217,119,6,0.2); }
+    .mz-silver .mz-format { background: rgba(148,163,184,0.1); color: #cbd5e1; border: 1px solid rgba(148,163,184,0.2); }
+    .mz-gold   .mz-format { background: rgba(234,179,8,0.1); color: #fde047; border: 1px solid rgba(234,179,8,0.2); }
+    .mz-desc { font-size: 0.8rem; color: var(--text2); line-height: 1.7; }
+
+    .team-section { margin-bottom: 64px; }
+    .team-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+    }
+    .team-card {
+      background: var(--bg2); border: 1px solid var(--line);
+      border-radius: 12px; padding: 20px 14px;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 10px; text-align: center; transition: all 0.2s;
+    }
+    .team-card:hover { background: var(--bg3); border-color: var(--line2); transform: translateY(-2px); }
+    .team-avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      border: 2px solid var(--line2);
+      object-fit: cover; overflow: hidden;
+      background: var(--bg4);
+    }
+    .team-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .team-name { font-size: 0.85rem; font-weight: 600; }
+
+    .tech-section { margin-bottom: 64px; }
+    .tech-table {
+      width: 100%; border-collapse: collapse;
+      background: var(--bg2); border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    .tech-table th {
+      font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text2); padding: 12px 18px; text-align: left;
+      border-bottom: 1px solid var(--line); background: var(--bg3);
+    }
+    .tech-table td {
+      padding: 14px 18px; font-size: 0.82rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+    }
+    .tech-table tr:last-child td { border-bottom: none; }
+    .tech-table tr:hover td { background: var(--bg3); }
+    .layer-pill {
+      font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
+      padding: 4px 8px; border-radius: 4px;
+      border: 1px solid; white-space: nowrap;
+    }
+    .lp-source  { background: rgba(34,197,94,0.07); border-color: rgba(34,197,94,0.2); color: #4ade80; }
+    .lp-ingest  { background: rgba(255,255,255,0.04); border-color: var(--line2); color: var(--text2); }
+    .lp-process { background: rgba(255,153,0,0.08); border-color: rgba(255,153,0,0.25); color: #fbbf24; }
+    .lp-storage { background: rgba(255,153,0,0.08); border-color: rgba(255,153,0,0.25); color: #fbbf24; }
+    .lp-catalog { background: rgba(139,92,246,0.07); border-color: rgba(139,92,246,0.2); color: #a78bfa; }
+    .lp-analytics { background: rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.2); color: #93c5fd; }
+
+    .tech-name { font-weight: 600; }
+    .tech-fn { color: var(--text2); font-size: 0.8rem; }
+
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--mono); font-size: 0.65rem; font-weight: 500;
+      padding: 4px 10px; border-radius: 4px;
+      background: rgba(234,179,8,0.08); border: 1px solid rgba(234,179,8,0.2);
+      color: #fde047;
+    }
+    .status-dot { width: 5px; height: 5px; border-radius: 50%; background: #fde047; animation: pulse 2s infinite; }
+
+    footer {
+      border-top: 1px solid var(--line); padding: 28px 0;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .footer-left { font-family: var(--mono); font-size: 0.7rem; color: var(--text2); }
+    .footer-right { font-family: var(--mono); font-size: 0.65rem; color: var(--text3); }
+
+    @media(max-width:980px){
+      .hero { grid-template-columns: 1fr; }
+      .pipeline-vis { display: none; }
+      .arch-grid { grid-template-columns: repeat(2,1fr); }
+      .team-grid { grid-template-columns: repeat(3,1fr); }
+      .stats-bar { grid-template-columns: repeat(3,1fr); }
+    }
+    @media(max-width:640px){
+      .arch-grid,.medallion-flow { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: repeat(2,1fr); }
+      .medallion-flow { background: none; border: none; gap: 12px; }
+      .medal-zone { border-radius: 12px; border: 1px solid var(--line); }
+      .medal-zone + .medal-zone { border-left: 1px solid var(--line); }
+      .stats-bar { grid-template-columns: repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow-top"></div>
+  <div class="glow-right"></div>
+
+  <nav>
+    <div class="shell nav-inner">
+      <div class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <div>
+          <div class="logo-name">Tour4Friends Analytics</div>
+          <div class="logo-tag">DATA LAKE · MVP · ELT</div>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a class="nav-btn" href="#arquitetura">Arquitetura</a>
+        <a class="nav-btn" href="#time">Time</a>
+        <a class="nav-btn primary" href="https://github.com/Thiago-code-lab/tour4friends-datalake" target="_blank" rel="noreferrer">GitHub →</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="shell">
+    <section class="hero">
+      <div>
+        <div class="hero-eyebrow">Projeto Integrador · 2025</div>
+        <h1>Data Lake para <em>Turismo Inteligente</em></h1>
+        <p class="hero-desc">
+          Uma arquitetura moderna de ELT que transforma dados brutos de reservas e interacoes da plataforma Tour4Friends em inteligencia estrategica de negocios, da ingestao em tempo real ate os dashboards analiticos.
+        </p>
+        <div class="hero-ctas">
+          <a class="cta-primary" href="https://github.com/Thiago-code-lab/tour4friends-datalake" target="_blank" rel="noreferrer">Ver Repositorio</a>
+          <a class="cta-secondary" href="#arquitetura">Explorar Arquitetura</a>
+        </div>
+        <div class="badge-cluster">
+          <span class="tech-badge tb-aws">AWS S3</span>
+          <span class="tech-badge tb-aws">AWS Glue</span>
+          <span class="tech-badge tb-aws">Athena</span>
+          <span class="tech-badge tb-kafka">Apache Kafka</span>
+          <span class="tech-badge tb-mongo">MongoDB</span>
+          <span class="tech-badge tb-spark">PySpark</span>
+          <span class="tech-badge tb-docker">Docker</span>
+          <span class="tech-badge tb-bi">Power BI</span>
+        </div>
+      </div>
+
+      <div class="pipeline-vis">
+        <div class="pv-title"><span class="pv-dot"></span>Pipeline em producao</div>
+        <div class="pipeline-steps">
+          <div class="ps-item">
+            <div class="ps-connector">
+              <div class="ps-icon" style="background:rgba(34,197,94,0.1);">🗃️</div>
+              <div class="ps-line"></div>
+            </div>
+            <div class="ps-content">
+              <div class="ps-label">MongoDB (Fonte)</div>
+              <div class="ps-sub">Banco NoSQL operacional de reservas e interacoes em tempo real.</div>
+            </div>
+          </div>
+
+          <div class="ps-item">
+            <div class="ps-connector">
+              <div class="ps-icon" style="background:rgba(255,255,255,0.04);">⚡</div>
+              <div class="ps-line"></div>
+            </div>
+            <div class="ps-content">
+              <div class="ps-label">Kafka + CDC</div>
+              <div class="ps-sub">Change Data Capture captura eventos e publica em topicos Kafka.</div>
+            </div>
+          </div>
+
+          <div class="ps-item">
+            <div class="ps-connector">
+              <div class="ps-icon" style="background:rgba(255,153,0,0.1);">🪣</div>
+              <div class="ps-line"></div>
+            </div>
+            <div class="ps-content">
+              <div class="ps-label">S3 - Raw Zone (Bronze)</div>
+              <div class="ps-sub">Kafka Connect realiza o load direto no S3 em JSON.</div>
+            </div>
+          </div>
+
+          <div class="ps-item">
+            <div class="ps-connector">
+              <div class="ps-icon" style="background:rgba(255,153,0,0.1);">⚙️</div>
+              <div class="ps-line"></div>
+            </div>
+            <div class="ps-content">
+              <div class="ps-label">AWS Glue - Spark</div>
+              <div class="ps-sub">Transformacao, limpeza, tipagem e conversao para Parquet (Silver para Gold).</div>
+            </div>
+          </div>
+
+          <div class="ps-item">
+            <div class="ps-connector">
+              <div class="ps-icon" style="background:rgba(59,130,246,0.1);">📊</div>
+            </div>
+            <div class="ps-content">
+              <div class="ps-label">Athena + Power BI</div>
+              <div class="ps-sub">SQL serverless sobre S3 com dashboards analiticos no Power BI.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="stats-bar">
+      <div class="stat-item">
+        <span class="stat-num c-green">3</span>
+        <span class="stat-lbl">Camadas Medallion</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num c-aws">6</span>
+        <span class="stat-lbl">Tecnologias AWS</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num c-blue">ELT</span>
+        <span class="stat-lbl">Arquitetura</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num c-teal">CDC</span>
+        <span class="stat-lbl">Ingestao em tempo real</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num c-purple">5</span>
+        <span class="stat-lbl">Integrantes</span>
+      </div>
+    </div>
+
+    <section class="arch-section" id="arquitetura">
+      <div class="sec-head">
+        <div>
+          <div class="sec-eyebrow">Stack Tecnico</div>
+          <div class="sec-title">Componentes da Arquitetura</div>
+        </div>
+        <span class="status-badge"><span class="status-dot"></span>Em Desenvolvimento</span>
+      </div>
+
+      <div class="arch-grid">
+        <div class="arch-card at-green">
+          <div class="arch-icon">🗃️</div>
+          <div>
+            <div class="arch-layer">Fonte</div>
+            <div class="arch-name">MongoDB</div>
+          </div>
+          <p class="arch-desc">Banco NoSQL operacional que armazena registros de viagens, reservas e interacoes de usuarios da plataforma Tour4Friends.</p>
+          <div class="arch-tags">
+            <span class="arch-tag">NoSQL</span>
+            <span class="arch-tag">CDC</span>
+            <span class="arch-tag">Operacional</span>
+          </div>
+        </div>
+
+        <div class="arch-card at-blue">
+          <div class="arch-icon">⚡</div>
+          <div>
+            <div class="arch-layer">Ingestao</div>
+            <div class="arch-name">Apache Kafka</div>
+          </div>
+          <p class="arch-desc">Barramento de streaming para processamento de eventos em tempo real, com carga direta no S3 via Kafka Connect.</p>
+          <div class="arch-tags">
+            <span class="arch-tag">Streaming</span>
+            <span class="arch-tag">Kafka Connect</span>
+            <span class="arch-tag">Tempo Real</span>
+          </div>
+        </div>
+
+        <div class="arch-card at-aws">
+          <div class="arch-icon">🪣</div>
+          <div>
+            <div class="arch-layer">Armazenamento</div>
+            <div class="arch-name">Amazon S3</div>
+          </div>
+          <p class="arch-desc">Data Lake escalavel organizado em camadas Medallion (Bronze, Silver e Gold) para refinamento progressivo dos dados.</p>
+          <div class="arch-tags">
+            <span class="arch-tag">Data Lake</span>
+            <span class="arch-tag">Parquet</span>
+            <span class="arch-tag">JSON</span>
+          </div>
+        </div>
+
+        <div class="arch-card at-aws">
+          <div class="arch-icon">⚙️</div>
+          <div>
+            <div class="arch-layer">Processamento</div>
+            <div class="arch-name">AWS Glue (Spark)</div>
+          </div>
+          <p class="arch-desc">Engine Spark serverless para limpeza, tipagem e conversao de formatos nas transformacoes das camadas Silver e Gold.</p>
+          <div class="arch-tags">
+            <span class="arch-tag">Spark</span>
+            <span class="arch-tag">PySpark</span>
+            <span class="arch-tag">ETL</span>
+          </div>
+        </div>
+
+        <div class="arch-card at-teal">
+          <div class="arch-icon">📋</div>
+          <div>
+            <div class="arch-layer">Catalogo</div>
+            <div class="arch-name">Glue Data Catalog</div>
+          </div>
+          <p class="arch-desc">Repositorio central de metadados para governanca e descoberta de dados, integrado ao Athena para consultas SQL.</p>
+          <div class="arch-tags">
+            <span class="arch-tag">Metadados</span>
+            <span class="arch-tag">Governanca</span>
+            <span class="arch-tag">Schema</span>
+          </div>
+        </div>
+
+        <div class="arch-card at-bi">
+          <div class="arch-icon">📊</div>
+          <div>
+            <div class="arch-layer">Analytics</div>
+            <div class="arch-name">Athena + Power BI</div>
+          </div>
+          <p class="arch-desc">Athena executa SQL serverless no S3 e alimenta dashboards estrategicos no Power BI para tomada de decisao.</p>
+          <div class="arch-tags">
+            <span class="arch-tag">SQL Serverless</span>
+            <span class="arch-tag">Dashboard</span>
+            <span class="arch-tag">Analytics</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="medallion-section">
+      <div class="sec-head">
+        <div>
+          <div class="sec-eyebrow">Data Lake</div>
+          <div class="sec-title">Medallion Architecture</div>
+        </div>
+      </div>
+      <div class="medallion-flow">
+        <div class="medal-zone mz-bronze">
+          <div class="mz-label">Camada 01</div>
+          <div class="mz-zone-name">Raw Zone</div>
+          <div class="mz-format">Bronze - JSON</div>
+          <p class="mz-desc">Eventos originais extraidos do MongoDB via CDC, armazenados sem transformacao como fonte da verdade do pipeline.</p>
+        </div>
+        <div class="medal-zone mz-silver">
+          <div class="mz-label">Camada 02</div>
+          <div class="mz-zone-name">Processed Zone</div>
+          <div class="mz-format">Silver - Parquet</div>
+          <p class="mz-desc">Dados limpos, tipados e convertidos para formato colunar via AWS Glue, com schema validado e particionamento eficiente.</p>
+        </div>
+        <div class="medal-zone mz-gold">
+          <div class="mz-label">Camada 03</div>
+          <div class="mz-zone-name">Curated Zone</div>
+          <div class="mz-format">Gold - Agregado</div>
+          <p class="mz-desc">Tabelas agregadas com regras de negocio aplicadas, prontas para analise estrategica no Athena e consumo no Power BI.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tech-section">
+      <div class="sec-head">
+        <div>
+          <div class="sec-eyebrow">Referencia</div>
+          <div class="sec-title">Matriz de Componentes</div>
+        </div>
+      </div>
+      <table class="tech-table">
+        <thead>
+          <tr>
+            <th>Camada</th>
+            <th>Tecnologia</th>
+            <th>Funcao</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="layer-pill lp-source">Fonte</span></td>
+            <td><span class="tech-name">MongoDB</span></td>
+            <td class="tech-fn">Banco NoSQL operacional para registros de viagens e reservas</td>
+          </tr>
+          <tr>
+            <td><span class="layer-pill lp-ingest">Ingestao</span></td>
+            <td><span class="tech-name">Apache Kafka</span></td>
+            <td class="tech-fn">Barramento de streaming para processamento de eventos em tempo real</td>
+          </tr>
+          <tr>
+            <td><span class="layer-pill lp-process">Processamento</span></td>
+            <td><span class="tech-name">AWS Glue (Spark)</span></td>
+            <td class="tech-fn">Engine para transformacao de dados e conversao JSON para Parquet</td>
+          </tr>
+          <tr>
+            <td><span class="layer-pill lp-storage">Armazenamento</span></td>
+            <td><span class="tech-name">Amazon S3</span></td>
+            <td class="tech-fn">Data Lake escalavel organizado em camadas Medallion</td>
+          </tr>
+          <tr>
+            <td><span class="layer-pill lp-catalog">Catalogo</span></td>
+            <td><span class="tech-name">Glue Data Catalog</span></td>
+            <td class="tech-fn">Repositorio central de metadados para governanca e descoberta</td>
+          </tr>
+          <tr>
+            <td><span class="layer-pill lp-analytics">Analytics</span></td>
+            <td><span class="tech-name">Amazon Athena + Power BI</span></td>
+            <td class="tech-fn">SQL serverless sobre S3 com dashboards estrategicos</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="team-section" id="time">
+      <div class="sec-head">
+        <div>
+          <div class="sec-eyebrow">Projeto Integrador</div>
+          <div class="sec-title">Time</div>
+        </div>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="https://avatars.githubusercontent.com/u/125063071?v=4" alt="Pablo Roberto">
+          </div>
+          <div class="team-name">Pablo Roberto</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="https://avatars.githubusercontent.com/u/198763242?v=4" alt="Lucas Antonio">
+          </div>
+          <div class="team-name">Lucas Antonio</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="https://github.com/user-attachments/assets/24b362a2-ee92-46aa-8d93-94d119dafabe" alt="Thiago Cardoso">
+          </div>
+          <div class="team-name">Thiago Cardoso</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="https://media.licdn.com/dms/image/v2/C4D03AQFgxzNm-DDZUg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1619123196498?e=1774483200&v=beta&t=2e1mPIFrfhDSjsOC8In234xJ_rkyJ5cRLbjxfDiZhUo" alt="William Nunes">
+          </div>
+          <div class="team-name">William Nunes</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="https://github.com/user-attachments/assets/f101196a-348f-42e8-ba32-e977bec686b0" alt="Daniel Fernando">
+          </div>
+          <div class="team-name">Daniel Fernando</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="shell" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+      <div class="footer-left">Tour4Friends Analytics - Data Lake MVP - 2025</div>
+      <div class="footer-right">MongoDB - Kafka - AWS Glue - S3 - Athena - Power BI</div>
+    </div>
+  </footer>
+</body>
+</html>
