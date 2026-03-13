@@ -38,7 +38,7 @@
       </td>
       <td align="center">
         <a href="#">
-          <img src="https://github.com/user-attachments/assets/24b362a2-ee92-46aa-8d93-94d119dafabe" width="100px;" alt="Membro 3"/><br/>
+          <img src="https://media.licdn.com/dms/image/v2/D4D03AQHJd1xye5u9Yg/profile-displayphoto-scale_400_400/B4DZzakxA5KEAk-/0/1773193598935?e=1775088000&v=beta&t=yB0D7ALws6vPfVz1fiadNPohfxuBDF3OLI66jyp2KR4" width="100px;" alt="Membro 3"/><br/>
           <sub><b>Thiago Cardoso</b></sub>
         </a>
       </td>
