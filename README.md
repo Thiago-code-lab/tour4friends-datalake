@@ -79,20 +79,6 @@ A arquitetura segue o modelo **ELT (Extract, Load, Transform)**, utilizando um b
 
 <img width="2816" height="1536" alt="Arquitetura de software" src="https://github.com/user-attachments/assets/fad4f7f8-db08-4c82-915d-fe46e51db278" />
 
-
-## 📋 Descrição do Pipeline
-
-Para garantir a entrega de um MVP funcional e focado, o pipeline foi desenhado para processar especificamente os dados de interação e reservas dos usuários:
-
-* **Ingestão (Extract & Load):** Os dados são extraídos do **MongoDB** em tempo real via **Change Data Capture (CDC)** e enviados ao **Apache Kafka**. O **Kafka Connect** realiza a carga direta (**Load**) dos dados brutos no **Amazon S3**.
-* **Camadas do Data Lake (Medallion Architecture):**
-* **Raw Zone (Bronze):** Armazena os eventos originais em formato **JSON**.
-* **Processed Zone (Silver):** Dados limpos, tipados e convertidos para formato colunar (**Parquet**) via **AWS Glue (Spark)**.
-* **Curated Zone (Gold):** Tabelas agregadas com regras de negócio prontas para análise estratégica.
-
-
-* **Catálogo e Analytics (Transform & Consumption):** O **Glue Data Catalog** gerencia os metadados, permitindo que o **Amazon Athena** execute consultas SQL diretamente no S3 para alimentar os dashboards no **Power BI**.
-
 ## 🛠️ Matriz de Componentes Tecnológicos
 
 | Camada | Tecnologia | Função na Estrutura |
@@ -106,5 +92,53 @@ Para garantir a entrega de um MVP funcional e focado, o pipeline foi desenhado p
 
 ---
 
+<details>
+  <summary><h2> Entregas por Disciplina</h2></summary>
 
+  <br/>
 
+  > Mapeamento das contribuições do projeto **Tour4Friends** para cada disciplina do semestre, conforme os requisitos mínimos do Projeto Integrador IV.
+
+  <br/>
+
+  ###  AGE017 — Gestão Econômica e Financeira *(Prof. Getúlio Kazue Akabane)*
+  **Requisito:** Gestão Financeira — Avaliação da situação econômica e financeira do negócio.
+
+  Levantamento dos custos dos serviços AWS utilizados no projeto (S3, Glue, Athena) e análise básica de viabilidade financeira da solução para a agência Tour4Friends.
+
+  ---
+
+  ###  ILP052 — Programação em Banco de Dados II *(Prof. Samuel Henrique da Rocha)*
+  **Requisito:** Programação NO-SQL — Controles + Procedures ETL NO-SQL.
+
+  Modelagem e população do banco de dados **MongoDB** com dados da agência, incluindo operações básicas de consulta, inserção e extração de dados (ETL) utilizando o MongoDB.
+
+  ---
+
+  ###  ILP053 — Laboratório de Programação II *(Prof. Jobel Santos Corrêa)*
+  **Requisito:** Laboratório II — Utilização de bibliotecas em Python para tratamento e análise dos dados.
+
+  Scripts em **Python** para leitura, limpeza e tratamento dos dados de reservas, utilizando a biblioteca **Pandas** para manipulação e preparação dos dados para análise.
+
+  ---
+
+  ###  MAQ025 — Aprendizagem de Máquinas *(Prof. Carlos Eduardo Dantas de Menezes)*
+  **Requisito:** Aprendizagem Máquina — Aplicação de algum algoritmo de aprendizado para análise dos dados.
+
+  Aplicação de um algoritmo de **clusterização (K-Means)** para agrupar clientes por perfil de compra, identificando padrões de comportamento nos dados de reservas da Tour4Friends.
+
+  ---
+
+  ###  BDN003 — Big Data Analytics I *(Prof. Claudia de Lello Courtouké)*
+  **Requisito:** Analytics I — Desenvolvimento e aplicação de modelo estatístico para os dados.
+
+  Análise estatística básica dos dados de reservas: média, mediana, desvio padrão e análise de sazonalidade, com visualizações geradas no **Power BI**.
+
+  ---
+
+  ###  BDN002 — Arquitetura de Big Data e DW/BI *(Prof. Izaias Porfirio Faria)*
+  **Requisito:** Arquitetura BI-BigData — Definição e avaliação da arquitetura da aplicação. Integração de fontes de dados.
+
+  Definição e documentação da arquitetura do Data Lake com as camadas **Bronze, Silver e Gold** na AWS, integrando as fontes de dados do MongoDB até o dashboard final no **Power BI**.
+
+</details>
