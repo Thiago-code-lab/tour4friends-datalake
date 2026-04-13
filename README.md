@@ -38,13 +38,13 @@
       </td>
       <td align="center">
         <a href="#">
-          <img src="https://media.licdn.com/dms/image/v2/D4D03AQHJd1xye5u9Yg/profile-displayphoto-scale_400_400/B4DZzakxA5KEAk-/0/1773193598935?e=1775088000&v=beta&t=yB0D7ALws6vPfVz1fiadNPohfxuBDF3OLI66jyp2KR4" width="100px;" alt="Membro 3"/><br/>
+          <img src="https://media.licdn.com/dms/image/v2/D4D03AQHJd1xye5u9Yg/profile-displayphoto-scale_400_400/B4DZzakxA5KEAk-/0/1773193598935?e=1777507200&v=beta&t=dpVaT00VB52N4TqE0klBdeomjQSJJaV9jc5m3eFPOQQ" width="100px;" alt="Membro 3"/><br/>
           <sub><b>Thiago Cardoso</b></sub>
         </a>
       </td>
       <td align="center">
         <a href="#">
-          <img src="https://media.licdn.com/dms/image/v2/C4D03AQFgxzNm-DDZUg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1619123196498?e=1774483200&v=beta&t=2e1mPIFrfhDSjsOC8In234xJ_rkyJ5cRLbjxfDiZhUo" width="100px;" alt="Membro 4"/><br/>
+          <img src="https://media.licdn.com/dms/image/v2/C4D03AQFgxzNm-DDZUg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1619123196498?e=1777507200&v=beta&t=YEiIZLJ82nBAlGvmmo8mXdWl13yZsxKgTSSBUWT9lvc" width="100px;" alt="Membro 4"/><br/>
           <sub><b>William Nunes</b></sub>
         </a>
       </td>>
