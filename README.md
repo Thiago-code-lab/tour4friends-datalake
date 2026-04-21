@@ -77,7 +77,7 @@ Este repositório documenta a construção de um pipeline escalável para a agê
 
 A arquitetura segue o modelo **ELT (Extract, Load, Transform)**, utilizando um barramento de streaming para garantir a agilidade no processamento dos dados.
 
-<img width="2816" height="1536" alt="Arquitetura de software" src="https://github.com/user-attachments/assets/fad4f7f8-db08-4c82-915d-fe46e51db278" />
+<img width="1693" height="929" alt="Image" src="https://github.com/user-attachments/assets/8d209603-f56b-40e6-b3aa-ad45a9919794" />
 
 ## 🛠️ Matriz de Componentes Tecnológicos
 
