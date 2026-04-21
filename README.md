@@ -88,7 +88,7 @@ A arquitetura segue o modelo **ELT (Extract, Load, Transform)**, utilizando um b
 | **Processamento** | AWS Glue (Spark) | Engine para transformação de dados e conversão de formatos (JSON para Parquet). |
 | **Armazenamento** | Amazon S3 | Data Lake escalável organizado em camadas Medallion. |
 | **Catálogo** | Glue Data Catalog | Repositório central de metadados para governança e descoberta. |
-| **Analytics** | Amazon Athena | Motor de consultas SQL serverless para análise de dados no S3. |
+| **Analytics** | Google Colab + Power BI | Análise exploratória, preparação dos dados e publicação de dashboards. |
 
 ---
 
