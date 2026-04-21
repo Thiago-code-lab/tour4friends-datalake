@@ -142,3 +142,4 @@ A arquitetura segue o modelo **ELT (Extract, Load, Transform)**, utilizando um b
   Definição e documentação da arquitetura do Data Lake com as camadas **Bronze, Silver e Gold** na AWS, integrando as fontes de dados do MongoDB até o dashboard final no **Power BI**.
 
 </details>
+
