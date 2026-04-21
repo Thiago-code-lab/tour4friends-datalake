@@ -9,8 +9,6 @@
 ![Kafka](https://img.shields.io/badge/Apache-Kafka-black)
 ![AWS Glue](https://img.shields.io/badge/AWS-Glue_|_Spark-orange)
 ![AWS S3](https://img.shields.io/badge/AWS-S3_Lake-orange)
-![AWS Athena](https://img.shields.io/badge/AWS-Athena_SQL-orange)
-![Docker](https://img.shields.io/badge/Docker-Compose-2496ED)
 ![PowerBI](https://img.shields.io/badge/Power_BI-Analytics-F2C811)
 
 > **Projeto Integrador - Tour4Friends**
