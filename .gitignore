@@ -1,0 +1,4 @@
+# Dados restritos com informacoes sensiveis de empresas e pessoas reais
+/Tour4friends-context/*.xls
+/Tour4friends-context/*.xlsx
+/data/canonical/csv/restricted/*.csv

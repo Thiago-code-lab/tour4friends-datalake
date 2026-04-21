@@ -301,7 +301,7 @@
     <div class="hero">
       <div class="hero-eyebrow">Projeto Integrador · 2025</div>
       <h1>Data Lake para <strong>turismo inteligente</strong></h1>
-      <p class="hero-desc">Pipeline ELT que transforma dados operacionais da plataforma Tour4Friends em inteligência de negócios — da ingestão em tempo real no Kafka até os dashboards no Power BI.</p>
+      <p class="hero-desc">Pipeline ELT batch-first que transforma dados operacionais da plataforma Tour4Friends em inteligência de negócios — da extração em lote com AWS Batch até os dashboards no Power BI.</p>
       <div class="hero-actions">
         <a class="btn-ghost" href="https://github.com/Thiago-code-lab" target="_blank">Ver repositório</a>
         <a class="btn-muted" href="#pipeline">Explorar arquitetura ↓</a>
@@ -313,7 +313,7 @@
       <div class="meta-divider"></div>
       <div class="meta-item"><span class="meta-val">3</span><span class="meta-lbl">Camadas Medallion</span></div>
       <div class="meta-divider"></div>
-      <div class="meta-item"><span class="meta-val">CDC</span><span class="meta-lbl">Ingestão real-time</span></div>
+      <div class="meta-item"><span class="meta-val">BATCH</span><span class="meta-lbl">Ingestão por lote</span></div>
       <div class="meta-divider"></div>
       <div class="meta-item"><span class="meta-val">6</span><span class="meta-lbl">Componentes AWS</span></div>
       <div class="meta-divider"></div>
@@ -322,6 +322,9 @@
 
     <section id="pipeline">
       <div class="sec-label">Fluxo de dados</div>
+      <div style="margin-bottom:24px">
+        <img width="1698" height="926" alt="Image" src="https://github.com/user-attachments/assets/fd9ed432-6662-4e53-b1c5-659e4e41cb7d" style="width:100%;height:auto;border:1px solid var(--line);border-radius:10px;display:block" />
+      </div>
       <div class="pipeline">
         <div class="pipe-step">
           <div class="pipe-num">01</div>
@@ -333,9 +336,9 @@
         <div class="pipe-step">
           <div class="pipe-num">02</div>
           <div class="pipe-icon">⚡</div>
-          <div class="pipe-name">Apache Kafka</div>
-          <div class="pipe-desc">CDC captura eventos. Kafka Connect faz Load direto no S3.</div>
-          <div class="pipe-tag">STREAMING · CDC</div>
+          <div class="pipe-name">AWS Batch</div>
+          <div class="pipe-desc">Jobs agendados extraem dados do MongoDB e dos arquivos operacionais e publicam lotes no S3.</div>
+          <div class="pipe-tag">SCHEDULED BATCH</div>
         </div>
         <div class="pipe-step">
           <div class="pipe-num">03</div>
@@ -367,7 +370,7 @@
         <div class="medal bronze">
           <div class="medal-top"><div class="medal-name">Raw Zone</div><span class="medal-format">JSON</span></div>
           <div class="medal-zone">Bronze · Camada 01</div>
-          <p class="medal-desc">Eventos originais extraídos via CDC. Dados brutos sem transformação — fonte da verdade imutável do pipeline.</p>
+          <p class="medal-desc">Snapshots e arquivos originais extraídos em lote. Dados brutos sem transformação — fonte da verdade imutável do pipeline.</p>
         </div>
         <div class="medal silver">
           <div class="medal-top"><div class="medal-name">Processed Zone</div><span class="medal-format">Parquet</span></div>
@@ -393,8 +396,8 @@
           </tr>
           <tr>
             <td><span class="layer-tag lt-ingest">Ingestão</span></td>
-            <td>Apache Kafka</td>
-            <td>Streaming de eventos em tempo real via Change Data Capture</td>
+            <td>AWS Batch</td>
+            <td>Execução de jobs em lote para extração, padronização inicial e carga no S3</td>
           </tr>
           <tr>
             <td><span class="layer-tag lt-process">Processamento</span></td>
@@ -451,7 +454,7 @@
   <footer>
     <div class="shell" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;width:100%">
       <span class="footer-l">Tour4Friends Analytics · Data Lake MVP · 2025</span>
-      <span class="footer-r">MongoDB · Kafka · AWS Glue · S3 · Athena · Power BI</span>
+      <span class="footer-r">MongoDB · AWS Batch · AWS Glue · S3 · Athena · Power BI</span>
     </div>
   </footer>
 
