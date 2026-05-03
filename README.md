@@ -23,19 +23,19 @@
   <table align="center">
     <tr>
         <td align="center">
-        <a href="#"><img src="../Pablo.jpeg" width="80px;" alt="Pablo Roberto"/><br/><sub>Pablo Roberto</sub></a>
+        <a href="#"><img src="Pablo.jpeg" width="80px;" alt="Pablo Roberto"/><br/><sub>Pablo Roberto</sub></a>
       </td>
       <td align="center">
-        <a href="#"><img src="../Lucas.jpeg" width="80px;" alt="Lucas Antonio"/><br/><sub>Lucas Antonio</sub></a>
+        <a href="#"><img src="Lucas.jpeg" width="80px;" alt="Lucas Antonio"/><br/><sub>Lucas Antonio</sub></a>
       </td>
       <td align="center">
-        <a href="#"><img src="../Thiago.jpg" width="80px;" alt="Thiago Cardoso"/><br/><sub>Thiago Cardoso</sub></a>
+        <a href="#"><img src="Thiago.jpg" width="80px;" alt="Thiago Cardoso"/><br/><sub>Thiago Cardoso</sub></a>
       </td>
       <td align="center">
-        <a href="#"><img src="../willian.jpeg" width="80px;" alt="William Nunes"/><br/><sub>William Nunes</sub></a>
+        <a href="#"><img src="willian.jpeg" width="80px;" alt="William Nunes"/><br/><sub>William Nunes</sub></a>
       </td>
       <td align="center">
-        <a href="#"><img src="../Daniel.png" width="80px;" alt="Daniel Fernando"/><br/><sub>Daniel Fernando</sub></a>
+        <a href="#"><img src="Daniel.png" width="80px;" alt="Daniel Fernando"/><br/><sub>Daniel Fernando</sub></a>
       </td>
     </tr>
   </table>
