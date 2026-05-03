@@ -22,20 +22,20 @@
   <br/>
   <table align="center">
     <tr>
-      <td align="center">
-        <a href="#"><img src="https://avatars.githubusercontent.com/u/125063071?v=4" width="80px;" alt="Pablo Roberto"/><br/><sub>Pablo Roberto</sub></a>
+        <td align="center">
+        <a href="#"><img src="../Pablo.jpeg" width="80px;" alt="Pablo Roberto"/><br/><sub>Pablo Roberto</sub></a>
       </td>
       <td align="center">
-        <a href="#"><img src="https://avatars.githubusercontent.com/u/198763242?v=4" width="80px;" alt="Lucas Antonio"/><br/><sub>Lucas Antonio</sub></a>
+        <a href="#"><img src="../Lucas.jpeg" width="80px;" alt="Lucas Antonio"/><br/><sub>Lucas Antonio</sub></a>
       </td>
       <td align="center">
-        <a href="#"><img src="https://media.licdn.com/dms/image/v2/D4D03AQHJd1xye5u9Yg/profile-displayphoto-scale_400_400/B4DZzakxA5KEAk-/0/1773193598935?e=1777507200&v=beta&t=dpVaT00VB52N4TqE0klBdeomjQSJJaV9jc5m3eFPOQQ" width="80px;" alt="Thiago Cardoso"/><br/><sub>Thiago Cardoso</sub></a>
+        <a href="#"><img src="../Thiago.jpg" width="80px;" alt="Thiago Cardoso"/><br/><sub>Thiago Cardoso</sub></a>
       </td>
       <td align="center">
-        <a href="#"><img src="https://media.licdn.com/dms/image/v2/C4D03AQFgxzNm-DDZUg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1619123196498?e=1777507200&v=beta&t=YEiIZLJ82nBAlGvmmo8mXdWl13yZsxKgTSSBUWT9lvc" width="80px;" alt="William Nunes"/><br/><sub>William Nunes</sub></a>
+        <a href="#"><img src="../willian.jpeg" width="80px;" alt="William Nunes"/><br/><sub>William Nunes</sub></a>
       </td>
       <td align="center">
-        <a href="#"><img src="https://github.com/user-attachments/assets/f101196a-348f-42e8-ba32-e977bec686b0" width="80px;" alt="Daniel Fernando"/><br/><sub>Daniel Fernando</sub></a>
+        <a href="#"><img src="../Daniel.png" width="80px;" alt="Daniel Fernando"/><br/><sub>Daniel Fernando</sub></a>
       </td>
     </tr>
   </table>
