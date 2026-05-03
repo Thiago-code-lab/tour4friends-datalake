@@ -2,3 +2,5 @@
 /Tour4friends-context/*.xls
 /Tour4friends-context/*.xlsx
 /data/canonical/csv/restricted/*.csv
+.env
+tmp/
