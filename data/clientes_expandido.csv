@@ -1,0 +1,31 @@
+﻿id_cliente,nome,idade,cidade_origem,data_primeiro_contact,qtd_reservas,total_gasto_R$,ultima_viagem
+CLI001,Ana Lima,38,São Paulo,2024-01-05,2,27600,2024-05-00
+CLI002,Carlos Mota,45,Belo Horizonte,2024-01-18,1,7900,2024-05-00
+CLI003,Fernanda Reis,52,Rio de Janeiro,2024-02-01,1,43600,2024-06-00
+CLI004,João Alves,41,Curitiba,2024-02-10,1,22000,2024-10-00
+CLI005,Mariana Costa,34,São Paulo,2024-02-25,1,6200,2024-09-00
+CLI006,Roberto Nunes,60,Porto Alegre,2024-04-02,1,65400,2024-06-00
+CLI007,Patrícia Silva,47,Brasília,2024-04-20,1,11800,2024-07-00
+CLI008,Diego Souza,29,São Paulo,2024-05-08,1,27900,2024-09-00
+CLI009,Beatriz Gomes,55,Recife,2024-05-25,1,21600,2024-10-00
+CLI010,Lucas Ferreira,33,São Paulo,2024-06-01,0,0,-
+CLI011,Ricardo Oliveira,58,Recife,2020-02-06,4,33428,2020-09-00
+CLI012,Camila Santos,51,Curitiba,2021-01-14,4,91424,2021-06-00
+CLI013,Bruno Pereira,57,Brasília,2025-01-16,3,44091,2025-01-00
+CLI014,Juliana Lima,48,Fortaleza,2020-04-06,4,68148,2020-07-00
+CLI015,Gabriel Costa,37,Recife,2023-02-04,1,23678,2023-09-00
+CLI016,Sophia Martins,64,Rio de Janeiro,2020-08-31,1,12902,2020-08-00
+CLI017,André Rocha,51,Salvador,2023-12-16,4,86648,2023-06-00
+CLI018,Letícia Souza,26,Fortaleza,2023-02-21,3,27321,2023-08-00
+CLI019,Marcos Silva,29,Fortaleza,2022-03-23,3,74100,2022-07-00
+CLI020,Helena Dias,31,Salvador,2024-12-15,2,47216,2024-07-00
+CLI021,Thiago Mello,36,Recife,2020-11-19,4,62048,2020-03-00
+CLI022,Larissa Duarte,51,Belo Horizonte,2026-12-24,4,63688,2026-08-00
+CLI023,Felipe Almeida,33,Salvador,2024-02-28,2,38270,2024-06-00
+CLI024,Amanda Vieira,64,Porto Alegre,2021-10-10,3,58515,2021-08-00
+CLI025,Vinícius Gomes,28,Belo Horizonte,2024-08-13,2,29882,2024-08-00
+CLI026,Isabela Ramos,54,Rio de Janeiro,2025-08-01,3,52638,2025-06-00
+CLI027,Rodrigo Nogueira,64,Belo Horizonte,2025-09-02,1,16380,2025-02-00
+CLI028,Clara Mendes,36,São Paulo,2023-09-05,4,62420,2023-09-00
+CLI029,Daniel Barbosa,50,Porto Alegre,2019-12-19,1,9091,2019-09-00
+CLI030,Vanessa Moreira,32,São Paulo,2026-02-14,3,65223,2026-07-00

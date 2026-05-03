@@ -49,7 +49,7 @@ Esta documentação detalha a infraestrutura de dados para o projeto **Tour4Frie
 
 A solução visa transformar dados operacionais em insights de negócio de forma ágil, seguindo o modelo **ELT (Extract, Load, Transform)** com um barramento de streaming para garantir agilidade no processamento.
 
-<img width="1693" height="929" alt="Diagrama de Arquitetura" src="https://github.com/user-attachments/assets/8d209603-f56b-40e6-b3aa-ad45a9919794" />
+<img width="1691" height="930" alt="Diagrama de Arquitetura" src="https://github.com/user-attachments/assets/71666f6f-cd8a-4658-99d2-618eda92c848" />
 
 ## Componentes Tecnológicos
 

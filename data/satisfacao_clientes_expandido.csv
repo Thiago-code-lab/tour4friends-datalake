@@ -1,0 +1,31 @@
+﻿id_reserva,id_cliente,nota_roteiro,nota_logistica,nota_atendimento,comentario,recomenda_empresa
+RES001,CLI001,9,10,8,Excelente guia,Sim
+RES002,CLI002,8,7,9,Hotéis simples,Sim
+RES003,CLI003,10,10,10,Viagem dos sonhos,Sim
+RES004,CLI004,7,6,8,Roteiro cansativo,Sim
+RES005,CLI005,8,9,7,Bem organizado,Sim
+RES006,CLI001,9,8,10,Segunda vez ótima,Sim
+RES007,CLI006,10,10,10,Grupo nota 10,Sim
+RES008,CLI007,9,9,9,Tudo perfeito,Sim
+RES009,CLI008,8,7,8,Comida boa,Sim
+RES010,CLI009,6,5,7,Problema no transporte,Não
+RES011,CLI011,8,7,10,Caminho inesquecível,Sim
+RES012,CLI012,7,6,8,Hotel um pouco barulhento,Sim
+RES013,CLI013,9,9,10,Logística impecável,Sim
+RES014,CLI014,8,7,9,Recomendo a todos,Sim
+RES015,CLI015,10,10,9,Caminho inesquecível,Sim
+RES016,CLI016,10,9,10,Recomendo a todos,Sim
+RES017,CLI017,9,7,9,Logística impecável,Sim
+RES018,CLI018,10,7,9,Superou as expectativas,Sim
+RES019,CLI019,8,10,9,Experiência incrível,Sim
+RES020,CLI020,6,7,5,Atraso no transporte de malas,Sim
+RES021,CLI021,8,9,8,Logística impecável,Sim
+RES022,CLI022,9,8,9,Guia muito atencioso,Sim
+RES023,CLI023,4,4,7,Hotel um pouco barulhento,Não
+RES024,CLI024,5,7,7,Poderia ter menos subida,Não
+RES025,CLI025,9,10,10,Hotéis de charme ótimos,Sim
+RES026,CLI026,8,10,8,Suporte 24h foi essencial,Sim
+RES027,CLI027,8,9,9,Organização nota mil,Sim
+RES028,CLI028,10,7,10,Recomendo a todos,Sim
+RES029,CLI029,8,8,10,Logística impecável,Sim
+RES030,CLI030,6,6,7,Poderia ter menos subida,Sim

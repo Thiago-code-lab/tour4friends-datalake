@@ -1,0 +1,31 @@
+﻿id_reserva,roteiro,n_pessoas,custo_estimado_R$,custo_real_R$,diferenca_R$,item_maior_desvio,valor_desvio_R$
+RES001,Caminho Português,2,11000,11200,200,Hospedagem,300
+RES002,Caminho Francês,1,4200,4300,100,Transporte,150
+RES003,Caminho Francês,4,26000,26800,800,Alimentação,500
+RES004,Via Francigena,2,14000,13500,-500,Hospedagem,-700
+RES005,Caminho Primitivo,1,3900,3800,-100,Transporte,-200
+RES006,Caminho Português,2,5500,5600,100,Seguro,150
+RES007,Caminho Francês,6,39000,40200,1200,Guia local,900
+RES008,Caminho do Norte,2,7200,7100,-100,Hospedagem,-200
+RES009,Caminho Português,3,17500,17200,-300,Alimentação,-400
+RES010,Via Francigena,2,13200,13000,-200,Transporte,-300
+RES011,Caminho Primitivo,6,31572,32808,1236,Transporte,1229
+RES012,Via Francigena,6,27192,25869,-1323,Hospedagem,-1157
+RES013,Caminho Português,2,12900,12984,84,Transporte,89
+RES014,Caminho do Norte,2,9982,8698,-1284,Seguro,-724
+RES015,Caminho do Norte,5,23305,22588,-717,Seguro,-476
+RES016,Caminho Português,5,32155,30813,-1342,Transporte,-1184
+RES017,Caminho Francês,1,5740,4992,-748,Transporte,-513
+RES018,Via Francigena,5,34950,33999,-951,Guia local,-874
+RES019,Caminho Português,4,27040,25625,-1415,Hospedagem,-1553
+RES020,Caminho do Norte,4,20696,20371,-325,Alimentação,-173
+RES021,Caminho Português,4,25152,24907,-245,Hospedagem,-126
+RES022,Caminho do Norte,6,34914,35536,622,Alimentação,599
+RES023,Caminho Primitivo,2,10484,9389,-1095,Hospedagem,-794
+RES024,Caminho Primitivo,6,31440,32973,1533,Alimentação,946
+RES025,Via Francigena,5,32870,32310,-560,Hospedagem,-635
+RES026,Caminho Primitivo,3,15042,15351,309,Seguro,312
+RES027,Via Francigena,3,17322,16153,-1169,Hospedagem,-762
+RES028,Caminho Primitivo,6,32640,31531,-1109,Guia local,-861
+RES029,Caminho Francês,3,16557,15089,-1468,Passagem Aérea,-1077
+RES030,Caminho Português,1,6208,5903,-305,Guia local,-270
