@@ -56,11 +56,11 @@ A solução visa transformar dados operacionais em insights de negócio de forma
 | Camada | Tecnologia | Função |
 |---|---|---|
 | Fonte | MongoDB | Banco de dados NoSQL operacional para registros de viagens. |
-| Ingestão | Apache Kafka | Barramento de streaming para processamento de eventos em tempo real. |
-| Processamento | AWS Glue (Spark) | Engine para transformação de dados e conversão de formatos (JSON para Parquet). |
-| Armazenamento | Amazon S3 | Data Lake escalável organizado em camadas Medallion. |
-| Catálogo | Glue Data Catalog | Repositório central de metadados para governança e descoberta. |
-| Analytics | Google Colab + Power BI | Análise exploratória, preparação dos dados e publicação de dashboards. |
+| Ingestão | AWS Batch | Processamento em lote responsável pela exportação e carga dos dados do MongoDB para o Amazon S3 nos formatos JSON e Parquet. |
+| Armazenamento | Amazon S3 | Data Lake escalável organizado em camadas Medallion (Raw/Bronze, Processed/Silver e Curated/Gold). |
+| Transformação | AWS Glue (Spark) | Engine para transformação de dados, limpeza, padronização, enriquecimento e agregações. |
+| Catálogo | Glue Data Catalog + Amazon Athena | Catálogo central de metadados e mecanismo de consulta SQL diretamente sobre os dados no S3. |
+| Analytics | Google Colab + Power BI | Análise exploratória, experimentos de Data Science e publicação de dashboards e KPIs. | |
 
 ---
 
