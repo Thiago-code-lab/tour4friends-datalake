@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tour4Friends Analytics · Data Lake</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:    #141922;
+      --bg2:   #1b2230;
+      --bg3:   #232c3d;
+      --line:  rgba(255,255,255,0.12);
+      --line2: rgba(255,255,255,0.2);
+      --text:  #f4f7ff;
+      --text2: #c3cbe0;
+      --text3: #9aa6c4;
+      --aws:   #FF9900;
+      --mono:  'IBM Plex Mono', monospace;
+      --sans:  'Inter', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .shell { width: min(1080px, calc(100% - 48px)); margin: 0 auto; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      border-bottom: 1px solid var(--line);
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(16px);
+    }
+    .nav-inner {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+    .logo-text { font-size: 13px; font-weight: 500; letter-spacing: -0.01em; }
+    .logo-sub { font-family: var(--mono); font-size: 10px; color: var(--text2); margin-top: 1px; letter-spacing: 0.06em; }
+    .nav-links { display: flex; gap: 4px; align-items: center; }
+    .nav-btn {
+      font-family: var(--sans); font-size: 12px;
+      padding: 6px 12px; border-radius: 5px;
+      border: 1px solid transparent; background: transparent;
+      color: var(--text2); cursor: pointer; transition: all 0.15s;
+      transform: translateY(0);
+    }
+    .nav-btn:hover {
+      color: var(--text);
+      border-color: var(--line2);
+      background: rgba(255,255,255,0.04);
+      transform: translateY(-1px);
+    }
+    .nav-btn.primary { border-color: var(--line2); color: var(--text); }
+    .nav-btn.primary:hover { border-color: rgba(255,255,255,0.3); }
+
+    .hero { padding: 80px 0 64px; border-bottom: 1px solid var(--line); }
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--text2); letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 300; letter-spacing: -0.04em; line-height: 1.1;
+      margin-bottom: 20px; max-width: 640px;
+    }
+    .hero h1 strong { font-weight: 600; }
+    .hero-desc {
+      font-size: 14px; color: var(--text2); line-height: 1.8;
+      max-width: 520px; margin-bottom: 32px; font-weight: 300;
+    }
+    .hero-actions { display: flex; gap: 8px; align-items: center; }
+    .btn-ghost {
+      font-size: 12px; font-weight: 500;
+      padding: 8px 16px; border-radius: 5px;
+      border: 1px solid var(--line2); background: transparent;
+      color: var(--text); cursor: pointer; transition: all 0.15s;
+      display: inline-block;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+      transform: translateY(-1px);
+    }
+    .btn-muted {
+      font-size: 12px; color: var(--text2);
+      padding: 8px 12px; transition: color 0.15s; display: inline-block;
+    }
+    .btn-muted:hover { color: var(--text); }
+
+    .meta-row {
+      display: flex; gap: 32px; align-items: center;
+      padding: 24px 0; border-bottom: 1px solid var(--line); flex-wrap: wrap;
+    }
+    .meta-item { display: flex; flex-direction: column; gap: 2px; }
+    .meta-val { font-size: 18px; font-weight: 600; letter-spacing: -0.03em; }
+    .meta-lbl { font-family: var(--mono); font-size: 10px; color: var(--text2); letter-spacing: 0.06em; }
+    .meta-divider { width: 1px; height: 28px; background: var(--line2); flex-shrink: 0; }
+    .status-pill {
+      font-family: var(--mono); font-size: 10px; font-weight: 500;
+      padding: 4px 8px; border-radius: 3px;
+      background: rgba(255,153,0,0.08); border: 1px solid rgba(255,153,0,0.18);
+      color: #ff9900; letter-spacing: 0.06em;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .status-pill::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--aws); animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+    .sec-label {
+      font-family: var(--mono); font-size: 10px; font-weight: 500;
+      color: var(--text2); letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    .pipeline {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
+    }
+    .pipe-step {
+      padding: 20px 16px; background: var(--bg2);
+      border-right: 1px solid var(--line);
+      display: flex; flex-direction: column; gap: 8px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .pipe-step::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+    .pipe-step:last-child { border-right: none; }
+    .pipe-step:hover {
+      background: var(--bg3);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(6,10,18,0.32);
+    }
+    .pipe-step:hover::after { opacity: 1; }
+    .pipe-num { font-family: var(--mono); font-size: 9px; color: var(--text3); letter-spacing: 0.06em; }
+    .pipe-icon { font-size: 18px; line-height: 1; }
+    .pipe-name { font-size: 12px; font-weight: 500; }
+    .pipe-desc { font-size: 11px; color: var(--text2); line-height: 1.6; }
+    .pipe-tag { font-family: var(--mono); font-size: 9px; color: var(--text3); margin-top: 4px; }
+
+    .medallion {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--line);
+      border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
+    }
+    .medal {
+      background: var(--bg2);
+      padding: 28px 24px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .medal::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.12), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+    .medal:hover {
+      background: var(--bg3);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(6,10,18,0.32);
+    }
+    .medal:hover::after { opacity: 1; }
+    .medal-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .medal-name { font-size: 13px; font-weight: 500; }
+    .medal-format {
+      font-family: var(--mono); font-size: 9px;
+      padding: 3px 6px; border-radius: 3px; border: 1px solid;
+    }
+    .bronze .medal-format { background: rgba(180,100,0,0.08); border-color: rgba(180,100,0,0.2); color: #c27c2a; }
+    .silver .medal-format { background: rgba(160,160,160,0.08); border-color: rgba(160,160,160,0.2); color: #aaa; }
+    .gold   .medal-format { background: rgba(200,160,0,0.08); border-color: rgba(200,160,0,0.2); color: #c8a32a; }
+    .medal-zone { font-family: var(--mono); font-size: 9px; color: var(--text2); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+    .medal-desc { font-size: 12px; color: var(--text2); line-height: 1.7; font-weight: 300; }
+
+    .stack-table { width: 100%; border-collapse: collapse; }
+    .stack-table tr { border-bottom: 1px solid var(--line); transition: background 0.12s; }
+    .stack-table tr:last-child { border-bottom: none; }
+    .stack-table tr:hover td {
+      background: var(--bg2);
+      color: var(--text);
+    }
+    .stack-table td { padding: 14px 8px; vertical-align: middle; }
+    .stack-table td:first-child { width: 110px; padding-left: 0; }
+    .stack-table td:nth-child(2) { width: 200px; font-weight: 500; font-size: 13px; }
+    .stack-table td:last-child { color: var(--text2); font-size: 12px; font-weight: 300; }
+    .layer-tag {
+      font-family: var(--mono); font-size: 9px; font-weight: 500;
+      padding: 3px 7px; border-radius: 3px; border: 1px solid;
+      letter-spacing: 0.05em; white-space: nowrap; display: inline-block;
+    }
+    .lt-source   { background: rgba(34,197,94,0.05); border-color: rgba(34,197,94,0.15); color: #4ade80; }
+    .lt-ingest   { background: rgba(255,255,255,0.03); border-color: var(--line2); color: var(--text2); }
+    .lt-process  { background: rgba(255,153,0,0.05); border-color: rgba(255,153,0,0.15); color: #ffa040; }
+    .lt-storage  { background: rgba(255,153,0,0.05); border-color: rgba(255,153,0,0.15); color: #ffa040; }
+    .lt-catalog  { background: rgba(138,90,255,0.05); border-color: rgba(138,90,255,0.15); color: #a78bfa; }
+    .lt-analytics{ background: rgba(68,136,255,0.05); border-color: rgba(68,136,255,0.15); color: #7ab0ff; }
+
+    .team-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+    }
+    .team-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+      padding: 14px 10px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      transition: transform 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .team-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--line2);
+      background: rgba(255,255,255,0.03);
+    }
+    .team-avatar {
+      width: 64px; height: 64px; border-radius: 50%;
+      border: 1px solid var(--line2); overflow: hidden; background: var(--bg3);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .team-card:hover .team-avatar {
+      transform: scale(1.04);
+      border-color: rgba(255,255,255,0.35);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.28);
+    }
+    .team-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .team-name { font-size: 12px; font-weight: 500; }
+
+    footer {
+      padding: 28px 0; border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-l { font-family: var(--mono); font-size: 10px; color: var(--text2); }
+    .footer-r { font-family: var(--mono); font-size: 10px; color: var(--text3); }
+
+    @media(max-width:860px){
+      .pipeline { grid-template-columns: 1fr 1fr; }
+      .pipe-step { border-bottom: 1px solid var(--line); }
+      .team-grid { grid-template-columns: repeat(3,1fr); }
+      .medallion { grid-template-columns: 1fr; gap: 0; }
+      .medal { border-bottom: 1px solid var(--line); }
+    }
+    @media(max-width:540px){
+      .pipeline { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: repeat(2,1fr); }
+      .meta-divider { display: none; }
+      .meta-row { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="shell nav-inner">
+      <div>
+        <div class="logo-text">Tour4Friends Analytics</div>
+        <div class="logo-sub">DATA LAKE · ELT · MVP</div>
+      </div>
+      <div class="nav-links">
+        <a class="nav-btn" href="#pipeline">Pipeline</a>
+        <a class="nav-btn" href="#stack">Stack</a>
+        <a class="nav-btn" href="#time">Time</a>
+        <a class="nav-btn primary" href="https://github.com/Thiago-code-lab" target="_blank">GitHub →</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="shell">
+
+    <div class="hero">
+      <div class="hero-eyebrow">Projeto Integrador · 2025</div>
+      <h1>Data Lake para <strong>turismo inteligente</strong></h1>
+      <p class="hero-desc">Pipeline ELT batch-first que transforma dados operacionais da plataforma Tour4Friends em inteligência de negócios — da extração em lote com AWS Batch até os dashboards no Power BI.</p>
+      <div class="hero-actions">
+        <a class="btn-ghost" href="https://github.com/Thiago-code-lab" target="_blank">Ver repositório</a>
+        <a class="btn-muted" href="#pipeline">Explorar arquitetura ↓</a>
+      </div>
+    </div>
+
+    <div class="meta-row">
+      <div class="meta-item"><span class="meta-val">ELT</span><span class="meta-lbl">Arquitetura</span></div>
+      <div class="meta-divider"></div>
+      <div class="meta-item"><span class="meta-val">3</span><span class="meta-lbl">Camadas Medallion</span></div>
+      <div class="meta-divider"></div>
+      <div class="meta-item"><span class="meta-val">BATCH</span><span class="meta-lbl">Ingestão por lote</span></div>
+      <div class="meta-divider"></div>
+      <div class="meta-item"><span class="meta-val">6</span><span class="meta-lbl">Componentes AWS</span></div>
+      <div class="meta-divider"></div>
+      <span class="status-pill">Em Desenvolvimento</span>
+    </div>
+
+    <section id="pipeline">
+      <div class="sec-label">Fluxo de dados</div>
+      <div style="margin-bottom:24px">
+        <img width="1698" height="926" alt="Image" src="https://github.com/user-attachments/assets/fd9ed432-6662-4e53-b1c5-659e4e41cb7d" style="width:100%;height:auto;border:1px solid var(--line);border-radius:10px;display:block" />
+      </div>
+      <div class="pipeline">
+        <div class="pipe-step">
+          <div class="pipe-num">01</div>
+          <div class="pipe-icon">🗃️</div>
+          <div class="pipe-name">MongoDB</div>
+          <div class="pipe-desc">Banco NoSQL operacional. Fonte de reservas e interações.</div>
+          <div class="pipe-tag">EXTRACT</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num">02</div>
+          <div class="pipe-icon">⚡</div>
+          <div class="pipe-name">AWS Batch</div>
+          <div class="pipe-desc">Jobs agendados extraem dados do MongoDB e dos arquivos operacionais e publicam lotes no S3.</div>
+          <div class="pipe-tag">SCHEDULED BATCH</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num">03</div>
+          <div class="pipe-icon">🪣</div>
+          <div class="pipe-name">Amazon S3</div>
+          <div class="pipe-desc">Data Lake em camadas Medallion. Dados brutos em JSON.</div>
+          <div class="pipe-tag">LOAD · BRONZE</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num">04</div>
+          <div class="pipe-icon">⚙️</div>
+          <div class="pipe-name">AWS Glue</div>
+          <div class="pipe-desc">Spark serverless. Limpeza e conversão para Parquet.</div>
+          <div class="pipe-tag">TRANSFORM · SPARK</div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num">05</div>
+          <div class="pipe-icon">📊</div>
+          <div class="pipe-name">Athena + Power BI</div>
+          <div class="pipe-desc">SQL serverless sobre S3. Dashboards estratégicos.</div>
+          <div class="pipe-tag">ANALYTICS</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-label">Medallion Architecture</div>
+      <div class="medallion">
+        <div class="medal bronze">
+          <div class="medal-top"><div class="medal-name">Raw Zone</div><span class="medal-format">JSON</span></div>
+          <div class="medal-zone">Bronze · Camada 01</div>
+          <p class="medal-desc">Snapshots e arquivos originais extraídos em lote. Dados brutos sem transformação — fonte da verdade imutável do pipeline.</p>
+        </div>
+        <div class="medal silver">
+          <div class="medal-top"><div class="medal-name">Processed Zone</div><span class="medal-format">Parquet</span></div>
+          <div class="medal-zone">Silver · Camada 02</div>
+          <p class="medal-desc">Dados limpos, tipados e convertidos via AWS Glue. Schema validado e particionado para queries eficientes.</p>
+        </div>
+        <div class="medal gold">
+          <div class="medal-top"><div class="medal-name">Curated Zone</div><span class="medal-format">Agregado</span></div>
+          <div class="medal-zone">Gold · Camada 03</div>
+          <p class="medal-desc">Tabelas com regras de negócio aplicadas, prontas para consumo pelo Athena e Power BI.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack">
+      <div class="sec-label">Componentes tecnológicos</div>
+      <table class="stack-table">
+        <tbody>
+          <tr>
+            <td><span class="layer-tag lt-source">Fonte</span></td>
+            <td>MongoDB</td>
+            <td>Banco NoSQL operacional para registros de viagens e reservas</td>
+          </tr>
+          <tr>
+            <td><span class="layer-tag lt-ingest">Ingestão</span></td>
+            <td>AWS Batch</td>
+            <td>Execução de jobs em lote para extração, padronização inicial e carga no S3</td>
+          </tr>
+          <tr>
+            <td><span class="layer-tag lt-process">Processamento</span></td>
+            <td>AWS Glue (Spark)</td>
+            <td>Transformação e conversão de formatos JSON → Parquet</td>
+          </tr>
+          <tr>
+            <td><span class="layer-tag lt-storage">Armazenamento</span></td>
+            <td>Amazon S3</td>
+            <td>Data Lake escalável organizado em camadas Medallion</td>
+          </tr>
+          <tr>
+            <td><span class="layer-tag lt-catalog">Catálogo</span></td>
+            <td>Glue Data Catalog</td>
+            <td>Repositório central de metadados para governança e descoberta</td>
+          </tr>
+          <tr>
+            <td><span class="layer-tag lt-analytics">Analytics</span></td>
+            <td>Athena + Power BI</td>
+            <td>SQL serverless sobre S3 com dashboards estratégicos</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="time">
+      <div class="sec-label">Time</div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar"><img src="Pablo.jpeg" alt="Pablo Roberto" loading="lazy"></div>
+          <div class="team-name">Pablo Roberto</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><img src="Lucas.jpeg" alt="Lucas Antonio" loading="lazy"></div>
+          <div class="team-name">Lucas Antonio</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><img src="Thiago.jpg" alt="Thiago Cardoso" loading="lazy"></div>
+          <div class="team-name">Thiago Cardoso</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><img src="willian.jpeg" alt="William Nunes" loading="lazy"></div>
+          <div class="team-name">William Nunes</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><img src="Daniel.png" alt="Daniel Fernando" loading="lazy"></div>
+          <div class="team-name">Daniel Fernando</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="shell" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;width:100%">
+      <span class="footer-l">Tour4Friends Analytics · Data Lake MVP · 2025</span>
+      <span class="footer-r">MongoDB · AWS Batch · AWS Glue · S3 · Athena · Power BI</span>
+    </div>
+  </footer>
+
+</body>
+</html>

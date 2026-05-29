@@ -1,0 +1,101 @@
+id_reserva,data_reserva,id_cliente,roteiro,modalidade,n_pessoas,mes_viagem,valor_total_R$,custo_operacional_R$,canal_origem,status
+RES001,2024-01-10,CLI001,Caminho Português,Guiado,2,Abril,18400,11200,Instagram,Concluída
+RES002,2024-01-22,CLI002,Caminho Francês,Autoguiado,1,Maio,7900,4300,Google,Concluída
+RES003,2024-02-05,CLI003,Caminho Francês,Guiado,4,Junho,43600,26800,Indicação,Concluída
+RES004,2024-02-18,CLI004,Via Francigena,Guiado,2,Outubro,22000,13500,YouTube,Concluída
+RES005,2024-03-01,CLI005,Caminho Primitivo,Autoguiado,1,Setembro,6200,3800,Google,Concluída
+RES006,2024-03-15,CLI001,Caminho Português,Autoguiado,2,Maio,9200,5600,Instagram,Concluída
+RES007,2024-04-02,CLI006,Caminho Francês,Guiado,6,Junho,65400,40200,Indicação,Concluída
+RES008,2024-04-20,CLI007,Caminho do Norte,Autoguiado,2,Julho,11800,7100,WhatsApp,Concluída
+RES009,2024-05-08,CLI008,Caminho Português,Guiado,3,Setembro,27900,17200,Instagram,Concluída
+RES010,2024-05-25,CLI009,Via Francigena,Guiado,2,Outubro,21600,13000,Google,Concluída
+RES011,2024-09-19,CLI020,Caminho Francês,Autoguiado,1,Agosto,4613,2922,Instagram,Concluída
+RES012,2026-08-17,CLI015,Caminho Francês,Autoguiado,2,Setembro,8538,5340,Indicação,Concluída
+RES013,2022-06-30,CLI020,Caminho Primitivo,Autoguiado,4,Junho,18062,11370,Google,Concluída
+RES014,2020-09-17,CLI006,Via Francigena,Autoguiado,4,Junho,17117,10901,WhatsApp,Concluída
+RES015,2020-09-05,CLI014,Caminho Francês,Autoguiado,3,Setembro,12847,7843,Instagram,Concluída
+RES016,2020-10-22,CLI017,Caminho Primitivo,Guiado,1,Julho,10843,7039,Instagram,Concluída
+RES017,2024-10-16,CLI008,Caminho Francês,Autoguiado,3,Dezembro,12740,8264,Indicação,Concluída
+RES018,2019-04-22,CLI015,Via Francigena,Guiado,3,Julho,28099,18100,WhatsApp,Concluída
+RES019,2024-09-03,CLI017,Caminho Português,Guiado,2,Julho,19922,12459,Google,Concluída
+RES020,2026-12-17,CLI015,Caminho do Norte,Guiado,6,Julho,55511,34670,Indicação,Concluída
+RES021,2022-11-06,CLI019,Caminho do Norte,Autoguiado,4,Setembro,15617,9533,Google,Concluída
+RES022,2023-08-08,CLI015,Caminho Primitivo,Autoguiado,3,Agosto,11816,7559,YouTube,Concluída
+RES023,2025-11-19,CLI011,Caminho Português,Guiado,2,Agosto,20700,12962,WhatsApp,Concluída
+RES024,2023-11-06,CLI004,Caminho Francês,Guiado,3,Junho,27211,17347,Indicação,Concluída
+RES025,2020-04-21,CLI011,Caminho Primitivo,Guiado,6,Setembro,53437,33176,Instagram,Concluída
+RES026,2024-08-03,CLI009,Caminho Português,Autoguiado,5,Junho,20222,12364,Indicação,Concluída
+RES027,2024-01-21,CLI019,Caminho Primitivo,Autoguiado,2,Agosto,9828,6321,Instagram,Concluída
+RES028,2021-11-06,CLI010,Caminho Português,Autoguiado,6,Dezembro,24169,14577,Instagram,Concluída
+RES029,2025-09-08,CLI014,Caminho Francês,Autoguiado,6,Julho,25728,16115,Indicação,Concluída
+RES030,2024-12-24,CLI006,Caminho Português,Autoguiado,1,Setembro,6241,3864,Instagram,Concluída
+RES031,2024-01-10,CLI042,Caminho Português,Guiado,2,Abril,18400,11200,Instagram,Concluída
+RES032,2024-01-22,CLI067,Caminho Francês,Autoguiado,1,Maio,7900,4300,Google,Concluída
+RES033,2024-02-05,CLI045,Caminho Francês,Guiado,4,Junho,43600,26800,Indicação,Concluída
+RES034,2024-02-18,CLI054,Via Francigena,Guiado,2,Outubro,22000,13500,YouTube,Concluída
+RES035,2024-03-01,CLI064,Caminho Primitivo,Autoguiado,1,Setembro,6200,3800,Google,Concluída
+RES036,2024-03-15,CLI057,Caminho Português,Autoguiado,2,Maio,9200,5600,Instagram,Concluída
+RES037,2024-04-02,CLI067,Caminho Francês,Guiado,6,Junho,65400,40200,Indicação,Concluída
+RES038,2024-04-20,CLI082,Caminho do Norte,Autoguiado,2,Julho,11800,7100,WhatsApp,Concluída
+RES039,2024-05-08,CLI084,Caminho Português,Guiado,3,Setembro,27900,17200,Instagram,Concluída
+RES040,2024-05-25,CLI072,Via Francigena,Guiado,2,Outubro,21600,13000,Google,Concluída
+RES041,2024-09-19,CLI054,Caminho Francês,Autoguiado,1,Agosto,4613,2922,Instagram,Concluída
+RES042,2026-08-17,CLI067,Caminho Francês,Autoguiado,2,Setembro,8538,5340,Indicação,Concluída
+RES043,2022-06-30,CLI072,Caminho Primitivo,Autoguiado,4,Junho,18062,11370,Google,Concluída
+RES044,2020-09-17,CLI067,Via Francigena,Autoguiado,4,Junho,17117,10901,WhatsApp,Concluída
+RES045,2020-09-05,CLI067,Caminho Francês,Autoguiado,3,Setembro,12847,7843,Instagram,Concluída
+RES046,2020-10-22,CLI067,Caminho Primitivo,Guiado,1,Julho,10843,7039,Instagram,Concluída
+RES047,2024-10-16,CLI072,Caminho Francês,Autoguiado,3,Dezembro,12740,8264,Indicação,Concluída
+RES048,2019-04-22,CLI072,Via Francigena,Guiado,3,Julho,28099,18100,WhatsApp,Concluída
+RES049,2024-09-03,CLI074,Caminho Português,Guiado,2,Julho,19922,12459,Google,Concluída
+RES050,2026-12-17,CLI078,Caminho do Norte,Guiado,6,Julho,55511,34670,Indicação,Concluída
+RES051,2022-11-06,CLI068,Caminho do Norte,Autoguiado,4,Setembro,15617,9533,Google,Concluída
+RES052,2023-08-08,CLI067,Caminho Primitivo,Autoguiado,3,Agosto,11816,7559,YouTube,Concluída
+RES053,2025-11-19,CLI053,Caminho Português,Guiado,2,Agosto,20700,12962,WhatsApp,Concluída
+RES054,2023-11-06,CLI054,Caminho Francês,Guiado,3,Junho,27211,17347,Indicação,Concluída
+RES055,2020-04-21,CLI057,Caminho Primitivo,Guiado,6,Setembro,53437,33176,Instagram,Concluída
+RES056,2024-08-03,CLI056,Caminho Português,Autoguiado,5,Junho,20222,12364,Indicação,Concluída
+RES057,2024-01-21,CLI057,Caminho Primitivo,Autoguiado,2,Agosto,9828,6321,Instagram,Concluída
+RES058,2021-11-06,CLI064,Caminho Português,Autoguiado,6,Dezembro,24169,14577,Instagram,Concluída
+RES059,2025-09-08,CLI059,Caminho Francês,Autoguiado,6,Julho,25728,16115,Indicação,Concluída
+RES060,2024-12-24,CLI045,Caminho Português,Autoguiado,1,Setembro,6241,3864,Instagram,Concluída
+RES061,2024-10-16,CLI074,Caminho Francês,Autoguiado,3,Dezembro,12740,8264,Indicação,Concluída
+RES062,2019-04-22,CLI084,Via Francigena,Guiado,3,Julho,28099,18100,WhatsApp,Concluída
+RES063,2024-09-03,CLI074,Caminho Português,Guiado,2,Julho,19922,12459,Google,Concluída
+RES064,2026-12-17,CLI084,Caminho do Norte,Guiado,6,Julho,55511,34670,Indicação,Concluída
+RES065,2022-11-06,CLI042,Caminho do Norte,Autoguiado,4,Setembro,15617,9533,Google,Concluída
+RES066,2023-08-08,CLI074,Caminho Primitivo,Autoguiado,3,Agosto,11816,7559,YouTube,Concluída
+RES067,2025-11-19,CLI057,Caminho Português,Guiado,2,Agosto,20700,12962,WhatsApp,Concluída
+RES068,2023-11-06,CLI054,Caminho Francês,Guiado,3,Junho,27211,17347,Indicação,Concluída
+RES069,2020-04-21,CLI069,Caminho Primitivo,Guiado,6,Setembro,53437,33176,Instagram,Concluída
+RES070,2024-08-03,CLI047,Caminho Português,Autoguiado,5,Junho,20222,12364,Indicação,Concluída
+RES071,2024-01-21,CLI054,Caminho Primitivo,Autoguiado,2,Agosto,9828,6321,Instagram,Concluída
+RES072,2021-11-06,CLI058,Caminho Português,Autoguiado,6,Dezembro,24169,14577,Instagram,Concluída
+RES073,2025-09-08,CLI073,Caminho Francês,Autoguiado,6,Julho,25728,16115,Indicação,Concluída
+RES074,2024-12-24,CLI082,Caminho Português,Autoguiado,1,Setembro,6241,3864,Instagram,Concluída
+RES075,2024-01-10,CLI054,Caminho Português,Guiado,2,Abril,18400,11200,Instagram,Concluída
+RES076,2024-01-22,CLI054,Caminho Francês,Autoguiado,1,Maio,7900,4300,Google,Concluída
+RES077,2024-02-05,CLI057,Caminho Francês,Guiado,4,Junho,43600,26800,Indicação,Concluída
+RES078,2024-02-18,CLI047,Via Francigena,Guiado,2,Outubro,22000,13500,YouTube,Concluída
+RES079,2024-03-01,CLI054,Caminho Primitivo,Autoguiado,1,Setembro,6200,3800,Google,Concluída
+RES080,2024-03-15,CLI068,Caminho Português,Autoguiado,2,Maio,9200,5600,Instagram,Concluída
+RES081,2024-04-02,CLI057,Caminho Francês,Guiado,6,Junho,65400,40200,Indicação,Concluída
+RES082,2024-04-20,CLI082,Caminho do Norte,Autoguiado,2,Julho,11800,7100,WhatsApp,Concluída
+RES083,2024-05-08,CLI083,Caminho Português,Guiado,3,Setembro,27900,17200,Instagram,Concluída
+RES084,2024-05-25,CLI084,Via Francigena,Guiado,2,Outubro,21600,13000,Google,Concluída
+RES085,2024-09-19,CLI072,Caminho Francês,Autoguiado,1,Agosto,4613,2922,Instagram,Concluída
+RES086,2026-08-17,CLI057,Caminho Francês,Autoguiado,2,Setembro,8538,5340,Indicação,Concluída
+RES087,2022-06-30,CLI068,Caminho Primitivo,Autoguiado,4,Junho,18062,11370,Google,Concluída
+RES088,2020-09-17,CLI074,Via Francigena,Autoguiado,4,Junho,17117,10901,WhatsApp,Concluída
+RES089,2020-09-05,CLI089,Caminho Francês,Autoguiado,3,Setembro,12847,7843,Instagram,Concluída
+RES090,2020-10-22,CLI064,Caminho Primitivo,Guiado,1,Julho,10843,7039,Instagram,Concluída
+RES091,2024-10-16,CLI064,Caminho Francês,Autoguiado,3,Dezembro,12740,8264,Indicação,Concluída
+RES092,2019-04-22,CLI067,Via Francigena,Guiado,3,Julho,28099,18100,WhatsApp,Concluída
+RES093,2024-09-03,CLI052,Caminho Português,Guiado,2,Julho,19922,12459,Google,Concluída
+RES094,2024-01-22,CLI068,Caminho Francês,Autoguiado,1,Maio,7900,4300,Google,Concluída
+RES095,2024-02-05,CLI095,Caminho Francês,Guiado,4,Junho,43600,26800,Indicação,Concluída
+RES096,2024-02-18,CLI058,Via Francigena,Guiado,2,Outubro,22000,13500,YouTube,Concluída
+RES097,2024-03-01,CLI067,Caminho Primitivo,Autoguiado,1,Setembro,6200,3800,Google,Concluída
+RES098,2024-03-15,CLI054,Caminho Português,Autoguiado,2,Maio,9200,5600,Instagram,Concluída
+RES099,2024-04-02,CLI082,Caminho Francês,Guiado,6,Junho,65400,40200,Indicação,Concluída
+RES100,2024-04-20,CLI084,Caminho do Norte,Autoguiado,2,Julho,11800,7100,WhatsApp,Concluída
