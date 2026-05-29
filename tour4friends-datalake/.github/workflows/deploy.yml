@@ -1,0 +1,52 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Publish static site to gh-pages
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          TMP_DIR="$(mktemp -d)"
+          tar --exclude=.git --exclude=.github -cf - . | tar -xf - -C "$TMP_DIR"
+
+          if git ls-remote --heads origin gh-pages | grep -q gh-pages; then
+            git fetch origin gh-pages
+            git switch -C gh-pages origin/gh-pages
+          else
+            git switch --orphan gh-pages
+          fi
+
+          find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+
+          cp -a "$TMP_DIR"/. .
+          touch .nojekyll
+
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "No changes to publish"
+            exit 0
+          fi
+
+          git commit -m "deploy: $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          git push --force origin gh-pages
