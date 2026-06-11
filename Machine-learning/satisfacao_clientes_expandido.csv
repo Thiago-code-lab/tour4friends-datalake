@@ -3,27 +3,27 @@ RES001,CLI001,9,10,8,Excelente guia,Sim
 RES002,CLI002,8,7,9,Hotéis simples,Sim
 RES003,CLI003,10,10,10,Viagem dos sonhos,Sim
 RES004,CLI004,7,6,8,Roteiro cansativo,Sim
-RES005,CLI005,8,9,7,Bem organizado,Sim
-RES006,CLI001,9,8,10,Segunda vez ótima,Sim
+RES005,CLI002,8,9,7,Bem organizado,Sim
+RES006,CLI001,10,8,10,Segunda vez ótima,Sim
 RES007,CLI006,10,10,10,Grupo nota 10,Sim
 RES008,CLI007,9,9,9,Tudo perfeito,Sim
 RES009,CLI008,8,7,8,Comida boa,Sim
 RES010,CLI009,6,5,7,Problema no transporte,Não
-RES011,CLI011,8,7,10,Caminho inesquecível,Sim
+RES011,CLI001,8,7,10,Caminho inesquecível,Sim
 RES012,CLI012,7,6,8,Hotel um pouco barulhento,Sim
 RES013,CLI013,9,9,10,Logística impecável,Sim
 RES014,CLI014,8,7,9,Recomendo a todos,Sim
 RES015,CLI015,10,10,9,Caminho inesquecível,Sim
 RES016,CLI016,10,9,10,Recomendo a todos,Sim
-RES017,CLI017,9,7,9,Logística impecável,Sim
-RES018,CLI018,10,7,9,Superou as expectativas,Sim
+RES017,CLI008,9,7,9,Logística impecável,Sim
+RES018,CLI008,10,7,9,Superou as expectativas,Sim
 RES019,CLI019,8,10,9,Experiência incrível,Sim
 RES020,CLI020,6,7,5,Atraso no transporte de malas,Sim
 RES021,CLI021,8,9,8,Logística impecável,Sim
 RES022,CLI022,9,8,9,Guia muito atencioso,Sim
 RES023,CLI023,4,4,7,Hotel um pouco barulhento,Não
-RES024,CLI024,5,7,7,Poderia ter menos subida,Não
-RES025,CLI025,9,10,10,Hotéis de charme ótimos,Sim
+RES024,CLI004,5,7,7,Poderia ter menos subida,Não
+RES025,CLI004,9,10,10,Hotéis de charme ótimos,Sim
 RES026,CLI026,8,10,8,Suporte 24h foi essencial,Sim
 RES027,CLI027,8,9,9,Organização nota mil,Sim
 RES028,CLI028,10,7,10,Recomendo a todos,Sim
@@ -31,16 +31,16 @@ RES029,CLI030,8,8,10,Logística impecável,Sim
 RES030,CLI031,6,6,7,Poderia ter menos subida,Sim
 RES031,CLI032,8,7,9,Guia muito atencioso,Sim
 RES032,CLI033,8,8,9,Hotel um pouco barulhento,Não
-RES033,CLI034,5,9,7,Poderia ter menos subida,Sim
-RES034,CLI035,8,8,9,Hotéis de charme ótimos,Sim
-RES035,CLI036,8,8,8,Suporte 24h foi essencial,Sim
+RES033,CLI032,5,9,7,Poderia ter menos subida,Sim
+RES034,CLI032,8,8,9,Hotéis de charme ótimos,Sim
+RES035,CLI004,8,8,8,Suporte 24h foi essencial,Sim
 RES036,CLI037,8,8,7,Organização nota mil,Sim
 RES037,CLI038,8,8,7,Recomendo a todos,Sim
 RES038,CLI039,8,8,8,Logística impecável,Sim
 RES039,CLI040,8,8,7,Caminho inesquecível,Sim
 RES040,CLI041,8,9,9,Hotel um pouco barulhento,Sim
-RES041,CLI042,8,8,8,Logística impecável,Sim
-RES042,CLI043,8,8,8,Recomendo a todos,Não
+RES041,CLI040,8,8,8,Logística impecável,Sim
+RES042,CLI040,8,8,8,Recomendo a todos,Não
 RES043,CLI044,5,8,9,Caminho inesquecível,Sim
 RES044,CLI045,8,8,8,Recomendo a todos,Sim
 RES045,CLI046,8,8,8,Logística impecável,Sim
@@ -50,52 +50,52 @@ RES048,CLI049,8,8,8,Viagem dos sonhos,Sim
 RES049,CLI050,8,8,8,Roteiro cansativo,Sim
 RES050,CLI051,8,8,8,Bem organizado,Sim
 RES051,CLI052,9,8,8,Segunda vez ótima,Sim
-RES052,CLI053,8,8,9,Grupo nota 10,Sim
+RES052,CLI052,8,8,9,Grupo nota 10,Sim
 RES053,CLI054,8,8,8,Tudo perfeito,Sim
 RES054,CLI055,9,8,7,Comida boa,Sim
-RES055,CLI056,8,8,8,Problema no transporte,Sim
+RES055,CLI055,8,8,8,Problema no transporte,Sim
 RES056,CLI057,9,8,7,Caminho inesquecível,Sim
 RES057,CLI058,8,8,9,Logística impecável,Sim
-RES058,CLI059,8,8,8,Guia muito atencioso,Sim
+RES058,CLI055,8,8,8,Guia muito atencioso,Sim
 RES059,CLI060,8,8,8,Hotel um pouco barulhento,Sim
-RES060,CLI061,8,8,7,Poderia ter menos subida,Sim
+RES060,CLI060,8,8,7,Poderia ter menos subida,Sim
 RES061,CLI062,9,8,8,Hotéis de charme ótimos,Sim
 RES062,CLI063,8,8,8,Suporte 24h foi essencial,Sim
 RES063,CLI064,8,9,9,Organização nota mil,Sim
-RES064,CLI065,8,8,8,Recomendo a todos,Sim
+RES064,CLI060,8,8,8,Recomendo a todos,Sim
 RES065,CLI066,8,8,8,Logística impecável,Sim
-RES066,CLI067,9,7,8,Logística impecável,Sim
+RES066,CLI060,9,7,8,Logística impecável,Sim
 RES067,CLI068,7,8,8,Guia muito atencioso,Sim
 RES068,CLI069,8,8,8,Hotel um pouco barulhento,Sim
 RES069,CLI070,10,9,8,Poderia ter menos subida,Sim
 RES070,CLI071,8,8,7,Hotéis de charme ótimos,Não
 RES071,CLI072,7,8,7,Suporte 24h foi essencial,Sim
-RES072,CLI073,8,8,8,Organização nota mil,Sim
+RES072,CLI060,8,8,8,Organização nota mil,Sim
 RES073,CLI074,8,8,9,Recomendo a todos,Sim
 RES074,CLI075,7,8,8,Logística impecável,Sim
-RES075,CLI076,8,7,8,Poderia ter menos subida,Sim
-RES076,CLI077,8,8,9,Excelente guia,Sim
+RES075,CLI075,8,7,8,Poderia ter menos subida,Sim
+RES076,CLI075,8,8,9,Excelente guia,Sim
 RES077,CLI078,8,8,8,Hotéis simples,Sim
-RES078,CLI079,10,7,7,Viagem dos sonhos,Sim
+RES078,CLI075,10,7,7,Viagem dos sonhos,Sim
 RES079,CLI080,8,8,8,Roteiro cansativo,Sim
 RES080,CLI081,9,8,8,Bem organizado,Sim
 RES081,CLI082,8,8,8,Segunda vez ótima,Sim
 RES082,CLI083,8,8,8,Grupo nota 10,Sim
 RES083,CLI084,8,8,8,Tudo perfeito,Sim
 RES084,CLI085,9,8,9,Comida boa,Sim
-RES085,CLI086,9,8,8,Problema no transporte,Sim
+RES085,CLI087,9,8,8,Problema no transporte,Sim
 RES086,CLI087,8,8,8,Caminho inesquecível,Sim
-RES087,CLI088,8,7,8,Excelente guia,Sim
-RES088,CLI089,8,7,8,Hotéis simples,Sim
-RES089,CLI090,7,8,8,Viagem dos sonhos,Sim
+RES087,CLI087,8,7,8,Excelente guia,Sim
+RES088,CLI087,8,7,8,Hotéis simples,Sim
+RES089,CLI087,7,8,8,Viagem dos sonhos,Sim
 RES090,CLI091,8,7,8,Roteiro cansativo,Sim
 RES091,CLI092,9,7,8,Bem organizado,Sim
 RES092,CLI093,8,8,9,Segunda vez ótima,Sim
 RES093,CLI094,9,7,8,Grupo nota 10,Sim
 RES094,CLI095,8,9,8,Tudo perfeito,Sim
-RES095,CLI096,9,8,8,Comida boa,Sim
-RES096,CLI097,10,8,8,Problema no transporte,Sim
-RES097,CLI098,9,8,8,Caminho inesquecível,Sim
+RES095,CLI095,9,8,8,Comida boa,Sim
+RES096,CLI095,10,8,8,Problema no transporte,Sim
+RES097,CLI095,9,8,8,Caminho inesquecível,Sim
 RES098,CLI099,9,8,8,Bem organizado,Sim
 RES099,CLI100,9,8,8,Segunda vez ótima,Sim
 RES100,CLI101,10,8,9,Grupo nota 10,Sim
