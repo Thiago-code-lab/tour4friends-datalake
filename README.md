@@ -11,6 +11,16 @@
   ![AWS S3](https://img.shields.io/badge/AWS-S3_Lake-orange)
   ![PowerBI](https://img.shields.io/badge/Power_BI-Analytics-F2C811)
 
+  <div align="center">
+
+<a href="https://www.cloudstudy.com.br/">
+  <img src="https://img.shields.io/badge/🌐_CloudStudy-cloudstudy.com.br-2563EB?style=for-the-badge" />
+</a>
+
+<a href="https://www.instagram.com/cloudstudy.ai/">
+  <img src="https://img.shields.io/badge/Instagram-@cloudstudy.ai-E4405F?style=for-the-badge&logo=instagram&logoColor=white" />
+</a>
+
   > Projeto Integrador — Tour4Friends  
   > Arquitetura moderna de Data Lake para transformar dados brutos de turismo em inteligência de negócios.
 </div>
